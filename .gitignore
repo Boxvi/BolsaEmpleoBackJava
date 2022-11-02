@@ -1,8 +1,19 @@
 HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
+
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+target/classes
+target/generated-sources
+target/generated-test-sources
+target/maven-archiver
+target/maven-status
+target/surefire-reports
+target/test-classes
+
+
+
+!.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
 .apt_generated
@@ -70,7 +81,7 @@ local.properties
 .buildpath
 
 # sbteclipse plugin
-.target
+
 
 # Tern plugin
 .tern-project
@@ -131,20 +142,7 @@ local.properties
 .idea/**/gradle.xml
 .idea/**/libraries
 
-# Gradle and Maven with auto-import
-# When using Gradle or Maven with auto-import, you should exclude module files,
-# since they will be recreated, and may cause churn.  Uncomment if using
-# auto-import.
-# .idea/artifacts
-# .idea/compiler.xml
-# .idea/jarRepositories.xml
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
-# *.iml
-# *.ipr
 
-# CMake
 cmake-build-*/
 
 # Mongo Explorer plugin
@@ -228,7 +226,7 @@ fabric.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+
 *.war
 *.nar
 *.ear
@@ -256,7 +254,7 @@ nbdist/
 # Edit at https://www.toptal.com/developers/gitignore?templates=maven
 
 ### Maven ###
-target/
+
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
