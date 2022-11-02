@@ -76,7 +76,6 @@
 				<version>2.7.4</version>
 			</plugin>
 		</plugins>
-		<finalName>springgc1</finalName>
 	</build>
 
 </project>

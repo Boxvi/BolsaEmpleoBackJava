@@ -1,4 +1,4 @@
-FROM openjdk:8
-COPY target/springgc1.jar springgc1.jar
+FROM openjdk:8-jdk-alpine
+COPY target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/springgc1.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
