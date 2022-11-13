@@ -1,5 +1,6 @@
 package ec.edu.ista.springgc1.controller;
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.entity.InstitucionEducativa;
 import ec.edu.ista.springgc1.service.impl.InstEduServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,9 @@ public class InstEduController {
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody InstitucionEducativa institucionEducativa) {
-
+        if (instEduService.findByNombre(institucionEducativa.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"Ya se encuentra registrada la Institución");
+        }
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(instEduService.save(institucionEducativa));
     }
@@ -38,6 +41,9 @@ public class InstEduController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody InstitucionEducativa institucionEducativa) {
         InstitucionEducativa instEduFromDb = instEduService.findById(id);
+        if (!institucionEducativa.getNombre().equalsIgnoreCase(instEduFromDb.getNombre()) && instEduService.findByNombre(institucionEducativa.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"Ya se encuentra registrada la Institución");
+        }
         instEduFromDb.setNombre(institucionEducativa.getNombre());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(instEduService.save(instEduFromDb));

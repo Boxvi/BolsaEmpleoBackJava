@@ -1,5 +1,6 @@
 package ec.edu.ista.springgc1.controller;
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.entity.Rol;
 import ec.edu.ista.springgc1.service.impl.RolServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class RolController {
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody Rol rol) {
+        if (rolService.findByNombre(rol.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"Ya se encuentra registrado el Rol");
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(rolService.save(rol));
@@ -38,6 +42,9 @@ public class RolController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Rol rol) {
         Rol rolFromDb = rolService.findById(id);
+        if (!rol.getNombre().equalsIgnoreCase(rolFromDb.getNombre()) && rolService.findByNombre(rol.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"Ya se encuentra registrado el Rol");
+        }
         rolFromDb.setNombre(rol.getNombre());
         rolFromDb.setDescripcion(rol.getDescripcion());
 
