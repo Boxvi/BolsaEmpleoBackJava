@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface GenericService<T> {
     List<T> findAll();
+    T findById(long id);
     T save(T entity);
-    void delete(Long id);
+    void delete(long id);
+    long count();
 }

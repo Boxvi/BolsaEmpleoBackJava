@@ -20,6 +20,6 @@ public class Rol {
     private String nombre;
 
     @NotEmpty
-    @Column(length = 45)
+    @Column(length = 255)
     private String descripcion;
 }
