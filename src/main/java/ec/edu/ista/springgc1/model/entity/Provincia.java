@@ -11,12 +11,12 @@ import javax.validation.constraints.NotEmpty;
 public class Provincia {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "prov_id")
     private Long id;
 
     @NotEmpty
     @Column(nullable = false, length = 50)
-  private String provincia;
+    private String nombre;
 
 
     @NotEmpty

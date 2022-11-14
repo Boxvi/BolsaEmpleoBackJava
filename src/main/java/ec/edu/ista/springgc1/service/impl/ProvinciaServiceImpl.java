@@ -14,8 +14,8 @@ public class ProvinciaServiceImpl extends GenericServiceImpl<Provincia>{
     @Autowired
     private ProvinciaRepository provinciaRepository;
 
-    public Optional<Provincia> findByProvincia(String provincia){
-        return provinciaRepository.findByProvincia(provincia);
+    public Optional<Provincia> findByNombre(String provincia){
+        return provinciaRepository.findByNombre(provincia);
     }
 
 }

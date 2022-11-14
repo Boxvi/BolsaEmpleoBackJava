@@ -2,7 +2,6 @@ package ec.edu.ista.springgc1.controller;
 
 import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.entity.AreaTrabajo;
-import ec.edu.ista.springgc1.model.entity.Rol;
 import ec.edu.ista.springgc1.service.impl.AreaTrabajoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/AreasTrabajo")
+@RequestMapping("/areasTrabajo")
 public class AreaTrabajoController {
 
     @Autowired
@@ -59,5 +58,4 @@ public class AreaTrabajoController {
         areaTrabajoService.delete(areaTrabajoFromDb.getId());
         return ResponseEntity.noContent().build();
     }
-
 }

@@ -21,17 +21,12 @@ public class Usuario {
     @JoinColumn(name = "rol_id")
     private Rol rol;
 
-    @NotEmpty
     private String username;
 
-    @NotEmpty
     private String password;
 
-    @NotEmpty
-    @Email
     private String email;
 
-    @NotEmpty
     private String telefono;
 
     private boolean estado;
@@ -41,7 +36,7 @@ public class Usuario {
 
 
     @PrePersist
-    public void setCurrentDateTime(){
+    public void setCurrentDateTime() {
         fechaCreacion = LocalDate.now();
     }
 

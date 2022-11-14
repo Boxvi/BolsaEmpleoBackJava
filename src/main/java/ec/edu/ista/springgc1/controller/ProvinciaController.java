@@ -33,7 +33,7 @@ public class ProvinciaController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody Provincia provincia) {
 
-        if (provinciaService.findByProvincia(provincia.getProvincia()).isPresent()){
+        if (provinciaService.findByNombre(provincia.getNombre()).isPresent()){
             throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado ya fue registrado");
         }
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -44,11 +44,11 @@ public class ProvinciaController {
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Provincia provincia) {
         Provincia provinciaFromDb = provinciaService.findById(id);
 
-        if (!provincia.getProvincia().equalsIgnoreCase(provinciaFromDb.getProvincia()) && provinciaService.findByProvincia(provincia.getProvincia()).isPresent()){
+        if (!provincia.getNombre().equalsIgnoreCase(provinciaFromDb.getNombre()) && provinciaService.findByNombre(provincia.getNombre()).isPresent()){
             throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado ya fue registrado");
         }
 
-        provinciaFromDb.setProvincia(provincia.getProvincia());
+        provinciaFromDb.setNombre(provincia.getNombre());
         provinciaFromDb.setPais(provincia.getPais());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(provinciaService.save(provinciaFromDb));

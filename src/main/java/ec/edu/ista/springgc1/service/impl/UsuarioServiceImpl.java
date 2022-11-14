@@ -32,7 +32,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements M
         Usuario usuario = new Usuario();
         Rol rol = rolRepository.findByNombre(usuarioDTO.getRol())
                 .orElseThrow(() -> new ResourceNotFoundException("nombre", usuarioDTO.getRol()));
-
+        usuario.setId(usuarioDTO.getId());
         usuario.setUsername(usuarioDTO.getUsername());
         usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
         usuario.setEmail(usuarioDTO.getEmail());
