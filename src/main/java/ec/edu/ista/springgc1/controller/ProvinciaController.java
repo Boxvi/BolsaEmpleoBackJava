@@ -1,5 +1,6 @@
 package ec.edu.ista.springgc1.controller;
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.entity.Provincia;
 import ec.edu.ista.springgc1.model.entity.Rol;
 import ec.edu.ista.springgc1.service.impl.ProvinciaServiceImpl;
@@ -32,6 +33,9 @@ public class ProvinciaController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody Provincia provincia) {
 
+        if (provinciaService.findByProvincia(provincia.getProvincia()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado ya fue registrado");
+        }
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(provinciaService.save(provincia));
     }
@@ -39,8 +43,13 @@ public class ProvinciaController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Provincia provincia) {
         Provincia provinciaFromDb = provinciaService.findById(id);
-        provinciaFromDb.setNombre_provincia(provincia.getNombre_provincia());
-        provinciaFromDb.setNombre_pais(provincia.getNombre_pais());
+
+        if (!provincia.getProvincia().equalsIgnoreCase(provinciaFromDb.getProvincia()) && provinciaService.findByProvincia(provincia.getProvincia()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado ya fue registrado");
+        }
+
+        provinciaFromDb.setProvincia(provincia.getProvincia());
+        provinciaFromDb.setPais(provincia.getPais());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(provinciaService.save(provinciaFromDb));
     }

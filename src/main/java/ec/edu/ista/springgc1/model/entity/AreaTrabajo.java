@@ -16,7 +16,7 @@ public class AreaTrabajo {
 
     @NotEmpty
     @Column(nullable = false, length = 30)
-    private String areaTrabajo_nombre;
+    private String nombre;
 
 
 

@@ -16,12 +16,12 @@ public class Provincia {
 
     @NotEmpty
     @Column(nullable = false, length = 50)
-  private String nombre_provincia;
+  private String provincia;
 
 
     @NotEmpty
     @Column(nullable = false, length = 50)
-    private String nombre_pais;
+    private String pais;
 
 
 }

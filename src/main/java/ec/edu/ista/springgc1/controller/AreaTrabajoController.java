@@ -1,5 +1,6 @@
 package ec.edu.ista.springgc1.controller;
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.entity.AreaTrabajo;
 import ec.edu.ista.springgc1.model.entity.Rol;
 import ec.edu.ista.springgc1.service.impl.AreaTrabajoServiceImpl;
@@ -32,13 +33,20 @@ public class AreaTrabajoController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody AreaTrabajo areaTrabajo) {
 
+        if (areaTrabajoService.findByNombre(areaTrabajo.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"El dato ingresado ya se encuentra registrado");
+        }
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(areaTrabajoService.save(areaTrabajo));
     }
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody AreaTrabajo areaTrabajo) {
         AreaTrabajo areaTrabajoFromDb = areaTrabajoService.findById(id);
-        areaTrabajoFromDb.setAreaTrabajo_nombre(areaTrabajo.getAreaTrabajo_nombre());
+        if (!areaTrabajo.getNombre().equalsIgnoreCase(areaTrabajoFromDb.getNombre())&& areaTrabajoService.findByNombre(areaTrabajo.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"El dato ingresado ya se encuentra registrado");
+        }
+
+        areaTrabajoFromDb.setNombre(areaTrabajo.getNombre());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(areaTrabajoService.save(areaTrabajoFromDb));
     }

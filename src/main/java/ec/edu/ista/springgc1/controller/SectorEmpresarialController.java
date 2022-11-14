@@ -1,6 +1,7 @@
 package ec.edu.ista.springgc1.controller;
 
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.entity.Rol;
 import ec.edu.ista.springgc1.model.entity.SectorEmpresarial;
 import ec.edu.ista.springgc1.service.impl.SectorEmpresarialServiceImpl;
@@ -33,6 +34,10 @@ public class SectorEmpresarialController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody SectorEmpresarial sectorEmpresarial) {
 
+        if (empresarialService.findByNombre(sectorEmpresarial.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"Ya se encuentra registrado el dato ingresado");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(empresarialService.save(sectorEmpresarial));
     }
@@ -40,7 +45,12 @@ public class SectorEmpresarialController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody SectorEmpresarial sectorEmpresarial) {
         SectorEmpresarial sectorFromDb = empresarialService.findById(id);
-        sectorFromDb.setNombre_sector(sectorEmpresarial.getNombre_sector());
+        if (!sectorEmpresarial.getNombre().equalsIgnoreCase(sectorFromDb.getNombre()) && empresarialService.findByNombre(sectorEmpresarial.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"Ya se encuentra registrado el dato ingresado");
+        }
+
+
+        sectorFromDb.setNombre(sectorEmpresarial.getNombre());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(empresarialService.save(sectorFromDb));
     }

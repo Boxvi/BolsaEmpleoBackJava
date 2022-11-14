@@ -16,7 +16,7 @@ public class SectorEmpresarial {
 
     @NotEmpty
     @Column(length = 255)
-    private String nombre_sector;
+    private String nombre;
 
 
 

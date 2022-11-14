@@ -1,5 +1,6 @@
 package ec.edu.ista.springgc1.controller;
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.entity.AreaEstudio;
 import ec.edu.ista.springgc1.model.entity.Rol;
 import ec.edu.ista.springgc1.service.impl.AreaEstudioServiceImpl;
@@ -33,6 +34,10 @@ public class AreaEstudioController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody AreaEstudio areaEstudio) {
 
+        if (areaEstudioService.findByNombre(areaEstudio.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"El dato ingresado ya se encuentra registrado");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(areaEstudioService.save(areaEstudio));
     }
@@ -40,7 +45,11 @@ public class AreaEstudioController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody AreaEstudio areaEstudio) {
         AreaEstudio areaEstudioFromDb = areaEstudioService.findById(id);
-        areaEstudioFromDb.setNombre_areaEstudio(areaEstudio.getNombre_areaEstudio());
+
+        if (!areaEstudio.getNombre().equalsIgnoreCase(areaEstudioFromDb.getNombre())&& areaEstudioService.findByNombre(areaEstudio.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"El dato ingresado ya se encuentra registrado");
+        }
+        areaEstudioFromDb.setNombre(areaEstudio.getNombre());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(areaEstudioService.save(areaEstudioFromDb));
     }

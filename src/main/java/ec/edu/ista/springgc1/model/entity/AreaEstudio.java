@@ -15,6 +15,6 @@ public class AreaEstudio {
     private Long id;
 
     @NotEmpty
-    @Column(nullable = false, length = 30)
-    private String nombre_areaEstudio;
+    @Column(nullable = false, length = 100)
+    private String nombre;
 }

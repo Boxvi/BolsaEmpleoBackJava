@@ -37,7 +37,6 @@ public class NivelController {
         if (nivelService.findByNombre(nivel.getNombre()).isPresent()){
             throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado  ya se encuentra registrado");
         }
-
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(nivelService.save(nivel));
     }
@@ -45,6 +44,9 @@ public class NivelController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Nivel nivel) {
         Nivel nivelFromDb = nivelService.findById(id);
+        if (!nivel.getNombre().equalsIgnoreCase(nivelFromDb.getNombre()) && nivelService.findByNombre(nivel.getNombre()).isPresent()){
+            throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado ya se encuentra registrado");
+        }
         nivelFromDb.setNombre(nivel.getNombre());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(nivelService.save(nivelFromDb));
