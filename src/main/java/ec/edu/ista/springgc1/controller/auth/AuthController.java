@@ -1,4 +1,4 @@
-package ec.edu.ista.springgc1.controller;
+package ec.edu.ista.springgc1.controller.auth;
 
 import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.dto.LoginDTO;
