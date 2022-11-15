@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,7 +13,11 @@ public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< Updated upstream
 
+=======
+    @Column(name = "rol_id")
+>>>>>>> Stashed changes
     private Long rol_id;
 
     @NotEmpty
@@ -22,4 +27,7 @@ public class Rol {
     @NotEmpty
     @Column(length = 255)
     private String descripcion;
+
+    /*@OneToMany(mappedBy = "rol", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Usuario> usuarios;*/
 }
