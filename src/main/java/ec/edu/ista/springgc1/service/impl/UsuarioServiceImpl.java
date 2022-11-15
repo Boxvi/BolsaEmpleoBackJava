@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Service
 public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements Mapper<Usuario, UsuarioDTO> {
 
@@ -65,13 +66,18 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements M
                 .collect(Collectors.toList());
     }
 
+    public UsuarioDTO findByIdToDTO(long id) {
+        return mapToDTO(usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("id", id)));
+    }
+
     @Override
     public Usuario save(Object entity) {
-        return usuarioRepository.save(mapToEntity((UsuarioDTO)entity));
+        return usuarioRepository.save(mapToEntity((UsuarioDTO) entity));
     }
 
     @Transactional
-    public Boolean existsByUsername(String username){
+    public Boolean existsByUsername(String username) {
         return usuarioRepository.existsByUsername(username);
     }
 }
