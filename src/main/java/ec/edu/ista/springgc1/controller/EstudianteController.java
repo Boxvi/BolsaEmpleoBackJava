@@ -4,7 +4,6 @@ import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.dto.EstudianteDTO;
 import ec.edu.ista.springgc1.model.entity.Estudiante;
 import ec.edu.ista.springgc1.service.impl.EstudianteServiceImpl;
-import ec.edu.ista.springgc1.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +20,6 @@ public class EstudianteController {
     @Autowired
     private EstudianteServiceImpl estudianteService;
 
-    @Autowired
-    private UsuarioServiceImpl usuarioService;
-
     @GetMapping
     ResponseEntity<List<?>> list() {
         return ResponseEntity.ok(estudianteService.findAll());
@@ -36,6 +32,11 @@ public class EstudianteController {
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody EstudianteDTO estudianteDTO) {
+
+        if (estudianteService.existsByCedula(estudianteDTO.getCedula())){
+            throw new AppException(HttpStatus.BAD_REQUEST, "Cédula ya se encuentra en otro registro");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(estudianteService.save(estudianteDTO));
     }
@@ -43,7 +44,9 @@ public class EstudianteController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody EstudianteDTO estudianteDTO) {
         EstudianteDTO estudianteFromDb = estudianteService.findByIdToDTO(id);
-
+        if (!estudianteFromDb.getCedula().equalsIgnoreCase(estudianteDTO.getCedula()) && estudianteService.existsByCedula(estudianteDTO.getCedula())){
+            throw new AppException(HttpStatus.BAD_REQUEST, "Cédula ya se encuentra en otro registro");
+        }
         estudianteFromDb.setUsername(estudianteDTO.getUsername());
         estudianteFromDb.setCedula(estudianteDTO.getCedula());
         estudianteFromDb.setNombres(estudianteDTO.getNombres());

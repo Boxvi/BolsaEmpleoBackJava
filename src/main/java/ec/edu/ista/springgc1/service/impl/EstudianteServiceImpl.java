@@ -84,6 +84,10 @@ public class EstudianteServiceImpl extends GenericServiceImpl<Estudiante> implem
                 .orElseThrow(()-> new ResourceNotFoundException("id", id)));
     }
 
+    public Boolean existsByCedula(String cedula){
+        return estudianteRepository.existsByCedula(cedula);
+    }
+
     @Override
     public Estudiante save(Object entity) {
         return estudianteRepository.save(mapToEntity((EstudianteDTO) entity));

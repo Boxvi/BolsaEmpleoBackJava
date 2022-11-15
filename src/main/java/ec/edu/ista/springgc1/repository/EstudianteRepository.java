@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface EstudianteRepository extends GenericRepository<Estudiante> {
 
     Optional<Estudiante> findByNombres(String nombres);
+
+    Boolean existsByCedula(String cedula);
 }

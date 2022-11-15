@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 public class SectorEmpresarial {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "areaEstudio_id", nullable = false)
+    @Column(name = "sec_emp_id", nullable = false)
     private Long id;
 
     @NotEmpty
