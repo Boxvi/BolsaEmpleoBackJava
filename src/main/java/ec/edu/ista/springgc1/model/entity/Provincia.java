@@ -11,7 +11,8 @@ import javax.validation.constraints.NotEmpty;
 public class Provincia {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long prov_id;
+    @Column(name = "prov_id")
+    private Long id;
 
     @NotEmpty
     @Column(nullable = false, length = 50)

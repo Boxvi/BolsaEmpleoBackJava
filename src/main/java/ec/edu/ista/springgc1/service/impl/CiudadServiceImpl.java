@@ -30,7 +30,7 @@ public class CiudadServiceImpl extends GenericServiceImpl<Ciudad> implements Map
         Provincia provincia = provinciaRepository.findByNombre(ciudadDTO.getProvincia())
                 .orElseThrow(()-> new ResourceNotFoundException("nombre",ciudadDTO.getProvincia()));
 
-        ciudad.setCiu_id(ciudadDTO.getId());
+        ciudad.setId(ciudadDTO.getId());
         ciudad.setNombre(ciudadDTO.getNombre());
         ciudad.setProvincia(provincia);
 
@@ -41,7 +41,7 @@ public class CiudadServiceImpl extends GenericServiceImpl<Ciudad> implements Map
     @Override
     public CiudadDTO mapToDTO(Ciudad ciudad) {
         CiudadDTO ciudadDTO = new CiudadDTO();
-        ciudadDTO.getId();
+        ciudadDTO.setId(ciudad.getId());
         ciudadDTO.setNombre(ciudad.getNombre());
         ciudadDTO.setProvincia(ciudad.getProvincia().getNombre());
         return ciudadDTO;

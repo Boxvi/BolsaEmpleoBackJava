@@ -1,7 +1,10 @@
 HELP.md
+.idea
+.idea/
+.idea/*
 
-
-
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 target/classes
 target/generated-sources
@@ -10,6 +13,7 @@ target/maven-archiver
 target/maven-status
 target/surefire-reports
 target/test-classes
+
 
 
 !.mvn/wrapper/maven-wrapper.jar

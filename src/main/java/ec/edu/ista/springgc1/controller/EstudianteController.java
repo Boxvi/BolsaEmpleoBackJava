@@ -1,5 +1,6 @@
 package ec.edu.ista.springgc1.controller;
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.dto.EstudianteDTO;
 import ec.edu.ista.springgc1.model.entity.Estudiante;
 import ec.edu.ista.springgc1.service.impl.EstudianteServiceImpl;
@@ -60,7 +61,7 @@ public class EstudianteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Estudiante estudianteFromDb = estudianteService.findById(id);
-        estudianteService.delete(estudianteFromDb.getEstudiante_id());
+        estudianteService.delete(estudianteFromDb.getId());
         return ResponseEntity.noContent().build();
     }
 }

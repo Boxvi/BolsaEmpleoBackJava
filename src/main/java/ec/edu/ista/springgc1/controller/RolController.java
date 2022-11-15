@@ -54,7 +54,7 @@ public class RolController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Rol rolFromDb = rolService.findById(id);
-        rolService.delete(rolFromDb.getRol_id());
+        rolService.delete(rolFromDb.getId());
         return ResponseEntity.noContent().build();
     }
 

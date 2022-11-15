@@ -8,11 +8,9 @@
         <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>ec.edu.ista</groupId>
     <artifactId>springgc1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
     <name>springgc1</name>
     <description>API to manage a job portal</description>
     <properties>
@@ -83,9 +81,6 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
-
-
-
     </dependencies>
 
     <build>
@@ -101,6 +96,7 @@
                         </exclude>
                     </excludes>
                 </configuration>
+                <version>2.7.4</version>
             </plugin>
         </plugins>
     </build>
