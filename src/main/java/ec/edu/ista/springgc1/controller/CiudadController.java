@@ -54,7 +54,7 @@ public class CiudadController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Ciudad ciudadFromDb = ciudadService.findById(id);
-        ciudadService.delete(ciudadFromDb.getId());
+        ciudadService.delete(ciudadFromDb.getCiu_id());
         return ResponseEntity.noContent().build();
     }
 }

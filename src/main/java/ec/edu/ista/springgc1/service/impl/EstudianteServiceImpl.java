@@ -1,6 +1,5 @@
 package ec.edu.ista.springgc1.service.impl;
 
-import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.exception.ResourceNotFoundException;
 import ec.edu.ista.springgc1.model.dto.EstudianteDTO;
 import ec.edu.ista.springgc1.model.entity.Ciudad;
@@ -12,7 +11,6 @@ import ec.edu.ista.springgc1.repository.generic.UsuarioRepository;
 import ec.edu.ista.springgc1.service.generic.impl.GenericServiceImpl;
 import ec.edu.ista.springgc1.service.map.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +37,7 @@ public class EstudianteServiceImpl extends GenericServiceImpl<Estudiante> implem
         Ciudad ciudad = ciudadRepository.findByNombre(estudianteDTO.getCiudad())
                 .orElseThrow(() -> new ResourceNotFoundException("ciudad",estudianteDTO.getCiudad()));
 
-        estudiante.setId(estudianteDTO.getId());
+        estudiante.setEstudiante_id(estudianteDTO.getId());
         estudiante.setUsuario(usuario);
         estudiante.setCedula(estudianteDTO.getCedula());
         estudiante.setNombres(estudianteDTO.getNombres());
@@ -58,7 +56,7 @@ public class EstudianteServiceImpl extends GenericServiceImpl<Estudiante> implem
     public EstudianteDTO mapToDTO(Estudiante estudiante) {
         EstudianteDTO estudianteDTO = new EstudianteDTO();
 
-        estudianteDTO.setId(estudiante.getId());
+        estudianteDTO.setId(estudiante.getEstudiante_id());
         estudianteDTO.setUsername(estudiante.getUsuario().getUsername());
         estudianteDTO.setCedula(estudiante.getCedula());
         estudianteDTO.setNombres(estudiante.getNombres());

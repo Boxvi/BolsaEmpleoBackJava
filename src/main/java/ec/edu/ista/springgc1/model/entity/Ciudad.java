@@ -11,8 +11,7 @@ public class Ciudad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ciu_id")
-    private Long id;
+    private Long ciu_id;
 
     @Column(nullable = false)
     private String nombre;

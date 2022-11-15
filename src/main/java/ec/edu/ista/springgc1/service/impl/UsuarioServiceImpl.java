@@ -32,7 +32,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements M
         Usuario usuario = new Usuario();
         Rol rol = rolRepository.findByNombre(usuarioDTO.getRol())
                 .orElseThrow(() -> new ResourceNotFoundException("nombre", usuarioDTO.getRol()));
-        usuario.setId(usuarioDTO.getId());
+        usuario.setUsuario_id(usuarioDTO.getId());
         usuario.setUsername(usuarioDTO.getUsername());
         usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
         usuario.setEmail(usuarioDTO.getEmail());
@@ -47,7 +47,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements M
     @Override
     public UsuarioDTO mapToDTO(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(usuario.getId());
+        usuarioDTO.setId(usuario.getUsuario_id());
         usuarioDTO.setPassword(usuario.getPassword());
         usuarioDTO.setUsername(usuario.getUsername());
         usuarioDTO.setEmail(usuario.getEmail());

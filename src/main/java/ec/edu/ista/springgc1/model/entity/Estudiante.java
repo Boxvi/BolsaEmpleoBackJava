@@ -12,8 +12,7 @@ public class Estudiante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "estudiante_id")
-    private Long id;
+    private Long estudiante_id;
     @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

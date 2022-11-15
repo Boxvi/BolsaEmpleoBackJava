@@ -57,7 +57,7 @@ public class ProvinciaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Provincia provinciaFromDb = provinciaService.findById(id);
-        provinciaService.delete(provinciaFromDb.getId());
+        provinciaService.delete(provinciaFromDb.getProv_id());
         return ResponseEntity.noContent().build();
     }
 
