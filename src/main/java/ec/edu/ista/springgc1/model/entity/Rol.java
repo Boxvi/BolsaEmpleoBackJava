@@ -13,11 +13,6 @@ public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< Updated upstream
-
-=======
-    @Column(name = "rol_id")
->>>>>>> Stashed changes
     private Long rol_id;
 
     @NotEmpty

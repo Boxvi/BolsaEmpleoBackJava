@@ -11,10 +11,6 @@ import java.time.LocalDate;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< Updated upstream
-=======
-    @Column(name = "usuario_id")
->>>>>>> Stashed changes
     private Long usuario_id;
 
     @ManyToOne
