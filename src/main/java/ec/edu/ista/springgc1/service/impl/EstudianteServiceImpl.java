@@ -1,6 +1,5 @@
 package ec.edu.ista.springgc1.service.impl;
 
-import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.exception.ResourceNotFoundException;
 import ec.edu.ista.springgc1.model.dto.EstudianteDTO;
 import ec.edu.ista.springgc1.model.entity.Ciudad;
@@ -12,7 +11,6 @@ import ec.edu.ista.springgc1.repository.generic.UsuarioRepository;
 import ec.edu.ista.springgc1.service.generic.impl.GenericServiceImpl;
 import ec.edu.ista.springgc1.service.map.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
