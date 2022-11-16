@@ -12,4 +12,5 @@ public interface AreaEstudioRepository extends GenericRepository<AreaEstudio>{
 
    Optional<AreaEstudio> findByNombre(String nombre);
 
+
 }
