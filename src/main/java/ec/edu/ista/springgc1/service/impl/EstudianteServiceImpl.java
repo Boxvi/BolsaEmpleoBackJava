@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,7 +93,12 @@ public class EstudianteServiceImpl extends GenericServiceImpl<Estudiante> implem
                 .orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
 
-    public Boolean existsByCedula(String cedula) {
+
+    public Optional<Estudiante> findByCedula (String cedula){
+
+        return estudianteRepository.findByCedula(cedula);
+    }
+    public Boolean existsByCedula(String cedula){
         return estudianteRepository.existsByCedula(cedula);
     }
 
