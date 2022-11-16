@@ -33,10 +33,7 @@ public class OfertaLaboralController {
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody OfertaLaboralDTO ofertaLaboralDTO) {
-      /*  if (ciudadService.findByNombre(ciudadDTO.getNombre()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"Ya se encuentra registrado la Ciudad");
-        }
-*/
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ofertaLaboralService.save(ofertaLaboralDTO));
     }
