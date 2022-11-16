@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/estudiantes")
 public class EstudianteController {
-    
+
     @Autowired
     private EstudianteServiceImpl estudianteService;
 
@@ -33,7 +33,7 @@ public class EstudianteController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody EstudianteDTO estudianteDTO) {
 
-        if (estudianteService.existsByCedula(estudianteDTO.getCedula())){
+        if (estudianteService.existsByCedula(estudianteDTO.getCedula())) {
             throw new AppException(HttpStatus.BAD_REQUEST, "Cédula ya se encuentra en otro registro");
         }
 
@@ -44,7 +44,7 @@ public class EstudianteController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody EstudianteDTO estudianteDTO) {
         EstudianteDTO estudianteFromDb = estudianteService.findByIdToDTO(id);
-        if (!estudianteFromDb.getCedula().equalsIgnoreCase(estudianteDTO.getCedula()) && estudianteService.existsByCedula(estudianteDTO.getCedula())){
+        if (!estudianteFromDb.getCedula().equalsIgnoreCase(estudianteDTO.getCedula()) && estudianteService.existsByCedula(estudianteDTO.getCedula())) {
             throw new AppException(HttpStatus.BAD_REQUEST, "Cédula ya se encuentra en otro registro");
         }
         estudianteFromDb.setUsername(estudianteDTO.getUsername());
@@ -56,7 +56,8 @@ public class EstudianteController {
         estudianteFromDb.setCiudad(estudianteDTO.getCiudad());
         estudianteFromDb.setDireccion(estudianteDTO.getDireccion());
         estudianteFromDb.setEstadoCivil(estudianteDTO.getEstadoCivil());
-        estudianteFromDb.setFotografia(estudianteDTO.getFotografia());
+        estudianteFromDb.setRutaImagen(estudianteDTO.getRutaImagen());
+        estudianteFromDb.setUrlImagen(estudianteDTO.getUrlImagen());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(estudianteService.save(estudianteFromDb));
     }

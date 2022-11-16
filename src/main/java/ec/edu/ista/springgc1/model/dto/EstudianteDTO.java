@@ -2,6 +2,7 @@ package ec.edu.ista.springgc1.model.dto;
 
 import lombok.Data;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -25,5 +26,7 @@ public class EstudianteDTO implements Serializable {
     private String ciudad;
     private String direccion;
     private String estadoCivil;
-    private String fotografia;
+
+    private String rutaImagen;
+    private String urlImagen;
 }

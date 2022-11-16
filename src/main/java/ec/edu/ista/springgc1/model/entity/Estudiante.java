@@ -41,5 +41,9 @@ public class Estudiante {
     @Column(name = "estado_civil")
     private String estadoCivil;
 
-    private String fotografia;
+    @Column(name = "ruta_imagen")
+    private String rutaImagen;
+
+    @Transient
+    private String urlImagen;
 }
