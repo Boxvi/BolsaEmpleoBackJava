@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -102,7 +103,10 @@ public class OfertaLaboralServiceImpl extends GenericServiceImpl<OfertaLaboral> 
         return mapToDTO(ofertaLaboralRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
 
+    public Optional<OfertaLaboral> findByCargo(String cargo){
 
+        return ofertaLaboralRepository.findByCargo(cargo);
+    }
 
 }
 
