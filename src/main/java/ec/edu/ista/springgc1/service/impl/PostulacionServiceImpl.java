@@ -37,9 +37,11 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
 
         Estudiante estudiante = estudianteRepository.findByCedula(postulacionDTO.getCedula())
                 .orElseThrow(()-> new ResourceNotFoundException("cedula",postulacionDTO.getCedula()));
+      /*  OfertaLaboral ofertaLaboral = ofertaLaboralRepository.findByCargo(postulacionDTO.getCargo())
+                .orElseThrow(()-> new ResourceNotFoundException("cargo",postulacionDTO.getCargo()));*/
+        OfertaLaboral ofertaLaboral = ofertaLaboralRepository.findById(postulacionDTO.getOfertalaboral_id())
+                .orElseThrow(()-> new ResourceNotFoundException("id",postulacionDTO.getOfertalaboral_id()));
 
-        OfertaLaboral ofertaLaboral = ofertaLaboralRepository.findByCargo(postulacionDTO.getCargo())
-                .orElseThrow(()-> new ResourceNotFoundException("cargo",postulacionDTO.getCargo()));
 
         postulacion.setId(postulacionDTO.getId());
         postulacion.setEstado(postulacionDTO.getEstado());
@@ -58,9 +60,8 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
         postulacionDTO.setId(postulacion.getId());
         postulacionDTO.setEstado(postulacion.getEstado());
         postulacionDTO.setFecha(postulacion.getFecha());
-        postulacionDTO.setCargo(postulacion.getOfertaLaboral().getCargo());
+        postulacionDTO.setOfertalaboral_id(postulacion.getOfertaLaboral().getId());
         postulacionDTO.setCedula(postulacion.getEstudiante().getCedula());
-
 
         return postulacionDTO;
     }

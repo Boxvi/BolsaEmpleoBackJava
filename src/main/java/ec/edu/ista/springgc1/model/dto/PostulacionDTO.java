@@ -13,7 +13,7 @@ public class PostulacionDTO implements Serializable {
 
     private String estado;
 
-    private String cargo;
+    private Long ofertalaboral_id;
 
     private String cedula;
 

@@ -53,7 +53,7 @@ public class PostulacionController {
 
         postulacionFromDb.setFecha(postulacionDTO.getFecha());
         postulacionFromDb.setEstado(postulacionDTO.getEstado());
-        postulacionFromDb.setCargo(postulacionDTO.getCargo());
+        postulacionFromDb.setOfertalaboral_id (postulacionDTO.getOfertalaboral_id());
         postulacionFromDb.setCedula(postulacionDTO.getCedula());
 
 
