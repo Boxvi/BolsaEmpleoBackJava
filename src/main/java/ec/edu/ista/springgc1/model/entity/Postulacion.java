@@ -1,8 +1,9 @@
 package ec.edu.ista.springgc1.model.entity;
+
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -14,18 +15,23 @@ public class Postulacion {
     @Column(name = "postulacion_id")
     private Long id;
 
-    private Date fecha;
+    private LocalDateTime fecha;
 
     private String estado;
 
     //relacion con empresa
     @ManyToOne
-    @JoinColumn(name="oferta_id")
+    @JoinColumn(name = "oferta_id")
     private OfertaLaboral ofertaLaboral;
 
     //relacion con estudiante
     @ManyToOne
-    @JoinColumn(name="estudiante_id")
+    @JoinColumn(name = "estudiante_id")
     private Estudiante estudiante;
+
+    @PrePersist
+    public void setCurrentDateTime() {
+        fecha = LocalDateTime.now();
+    }
 
 }

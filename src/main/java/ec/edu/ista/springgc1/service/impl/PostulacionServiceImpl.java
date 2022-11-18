@@ -1,6 +1,7 @@
 package ec.edu.ista.springgc1.service.impl;
 
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.exception.ResourceNotFoundException;
 import ec.edu.ista.springgc1.model.dto.PostulacionDTO;
 import ec.edu.ista.springgc1.model.entity.Estudiante;
@@ -12,6 +13,7 @@ import ec.edu.ista.springgc1.repository.PostulacionRepository;
 import ec.edu.ista.springgc1.service.generic.impl.GenericServiceImpl;
 import ec.edu.ista.springgc1.service.map.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,22 +35,25 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
 
     @Override
     public Postulacion mapToEntity(PostulacionDTO postulacionDTO) {
+
+
+        if (postulacionRepository.thereIsAnApplicationFromThisStudentToThisOffer(postulacionDTO.getCedula(), postulacionDTO.getOfertalaboral_id()) != 0) {
+            throw new AppException(HttpStatus.BAD_REQUEST, "El estudiante ya está aplicando a esta oferta");
+        }
+
         Postulacion postulacion = new Postulacion();
 
         Estudiante estudiante = estudianteRepository.findByCedula(postulacionDTO.getCedula())
-                .orElseThrow(()-> new ResourceNotFoundException("cedula",postulacionDTO.getCedula()));
-      /*  OfertaLaboral ofertaLaboral = ofertaLaboralRepository.findByCargo(postulacionDTO.getCargo())
-                .orElseThrow(()-> new ResourceNotFoundException("cargo",postulacionDTO.getCargo()));*/
+                .orElseThrow(() -> new ResourceNotFoundException("cedula", postulacionDTO.getCedula()));
         OfertaLaboral ofertaLaboral = ofertaLaboralRepository.findById(postulacionDTO.getOfertalaboral_id())
-                .orElseThrow(()-> new ResourceNotFoundException("id",postulacionDTO.getOfertalaboral_id()));
+                .orElseThrow(() -> new ResourceNotFoundException("id", postulacionDTO.getOfertalaboral_id()));
 
 
         postulacion.setId(postulacionDTO.getId());
         postulacion.setEstado(postulacionDTO.getEstado());
         postulacion.setFecha(postulacionDTO.getFecha());
-        postulacion.setOfertaLaboral(ofertaLaboral) ;
+        postulacion.setOfertaLaboral(ofertaLaboral);
         postulacion.setEstudiante(estudiante);
-
 
         return postulacion;
     }
@@ -65,6 +70,7 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
 
         return postulacionDTO;
     }
+
     @Override
     public List findAll() {
         return postulacionRepository.findAll()
@@ -82,8 +88,6 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
     public PostulacionDTO findByIdToDTO(long id) {
         return mapToDTO(postulacionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
-
-
 
 
 }
