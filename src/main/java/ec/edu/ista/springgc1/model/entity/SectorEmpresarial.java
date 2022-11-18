@@ -18,6 +18,9 @@ public class SectorEmpresarial {
     @Column(length = 255)
     private String nombre;
 
+    @NotEmpty
+    @Column(length = 255)
+    private String descripcion;
 
 
 }

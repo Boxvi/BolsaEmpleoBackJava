@@ -14,4 +14,6 @@ public interface EmpresaRepository extends GenericRepository<Empresa> {
 
     Boolean existsByRuc(String ruc);
 
+    Optional<Empresa> findByNombre(String nombre);
+
 }
