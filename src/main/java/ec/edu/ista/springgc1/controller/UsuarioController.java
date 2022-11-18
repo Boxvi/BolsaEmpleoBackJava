@@ -1,6 +1,5 @@
 package ec.edu.ista.springgc1.controller;
 
-import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.dto.UsuarioDTO;
 import ec.edu.ista.springgc1.model.entity.Usuario;
 import ec.edu.ista.springgc1.service.impl.UsuarioServiceImpl;
@@ -32,19 +31,9 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody UsuarioDTO usuarioDTO) {
-        UsuarioDTO usuarioFromDb = usuarioService.findByIdToDTO(id);
-        if (!usuarioFromDb.getUsername().equalsIgnoreCase(usuarioDTO.getUsername()) && usuarioService.existsByUsername(usuarioDTO.getUsername())) {
-            throw new AppException(HttpStatus.BAD_REQUEST, "Username ya se encuentra en otro registro");
-        }
 
-        usuarioFromDb.setUsername(usuarioDTO.getUsername());
-        usuarioFromDb.setPassword(usuarioDTO.getPassword());
-        usuarioFromDb.setEmail(usuarioDTO.getEmail());
-        usuarioFromDb.setTelefono(usuarioDTO.getTelefono());
-        usuarioFromDb.setEstado(usuarioDTO.isEstado());
-        usuarioFromDb.setRol(usuarioDTO.getRol());
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuarioFromDb));
+        Usuario usuario = usuarioService.update(id, usuarioDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
 
     @DeleteMapping("/{id}")

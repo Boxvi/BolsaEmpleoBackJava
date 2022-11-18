@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -13,7 +14,7 @@ public class UsuarioDTO implements Serializable {
     private Long id;
     @NotEmpty
     private String username;
-    @NotEmpty
+    @NotNull
     private String password;
     @NotEmpty
     @Email

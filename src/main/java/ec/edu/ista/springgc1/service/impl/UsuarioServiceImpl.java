@@ -1,5 +1,6 @@
 package ec.edu.ista.springgc1.service.impl;
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.exception.ResourceNotFoundException;
 import ec.edu.ista.springgc1.model.dto.UsuarioDTO;
 import ec.edu.ista.springgc1.model.entity.Rol;
@@ -9,6 +10,7 @@ import ec.edu.ista.springgc1.repository.generic.UsuarioRepository;
 import ec.edu.ista.springgc1.service.generic.impl.GenericServiceImpl;
 import ec.edu.ista.springgc1.service.map.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,6 +71,28 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements M
     public UsuarioDTO findByIdToDTO(long id) {
         return mapToDTO(usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("id", id)));
+    }
+
+    public Usuario update(long id, UsuarioDTO usuarioDTO) {
+
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id));
+        if (!usuario.getUsername().equalsIgnoreCase(usuarioDTO.getUsername()) && usuarioRepository.existsByUsername(usuarioDTO.getUsername())) {
+            throw new AppException(HttpStatus.BAD_REQUEST, "Username ya se encuentra en otro registro");
+        }
+        Rol rol = rolRepository.findByNombre(usuarioDTO.getRol())
+                .orElseThrow(() -> new ResourceNotFoundException("nombre", usuarioDTO.getRol()));
+
+        usuario.setUsername(usuarioDTO.getUsername());
+        if (!usuarioDTO.getPassword().isEmpty()) {
+            usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
+        }
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setTelefono(usuarioDTO.getTelefono());
+        usuario.setEstado(usuarioDTO.isEstado());
+        usuario.setRol(rol);
+
+        return usuarioRepository.save(usuario);
+
     }
 
     @Override
