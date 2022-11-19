@@ -13,12 +13,13 @@ public class CapacitacionDTO implements Serializable {
     private Long id;
 
     @NotEmpty
-    private String nombre;
+    private String nombre_capacitacion;
 
     @NotEmpty
     private String cedula;
 
 
+    private  String area_estudio;
     private String institucion;
 
 

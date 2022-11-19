@@ -27,7 +27,7 @@ public class CapacitacionController {
 
     @GetMapping("/{id}")
     ResponseEntity<?> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(capacitacionService.findById(id));
+        return ResponseEntity.ok(capacitacionService.findByIdToDTO(id));
     }
 
     @PostMapping
@@ -55,6 +55,7 @@ public class CapacitacionController {
         capacitacionFromDb.setFechaInicio(capacitacionDTO.getFechaInicio());
         capacitacionFromDb.setFechaFin(capacitacionDTO.getFechaFin());
         capacitacionFromDb.setNumHoras(capacitacionDTO.getNumHoras());
+        capacitacionFromDb.setNombre_capacitacion(capacitacionDTO.getNombre_capacitacion());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(capacitacionService.save(capacitacionFromDb));
 

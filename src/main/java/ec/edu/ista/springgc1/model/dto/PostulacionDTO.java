@@ -21,4 +21,5 @@ public class PostulacionDTO implements Serializable {
     private String cedula;
 
 
+
 }

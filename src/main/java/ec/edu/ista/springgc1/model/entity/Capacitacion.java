@@ -26,6 +26,7 @@ public class Capacitacion {
     private Estudiante estudiante;
 
 
+    private String nombre_capacitacion;
 
     private String institucion;
 
