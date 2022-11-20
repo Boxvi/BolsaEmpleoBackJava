@@ -3,6 +3,7 @@ package ec.edu.ista.springgc1.controller;
 import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.dto.CapacitacionDTO;
 import ec.edu.ista.springgc1.model.entity.Capacitacion;
+import ec.edu.ista.springgc1.model.entity.Postulacion;
 import ec.edu.ista.springgc1.service.impl.CapacitacionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,6 +68,13 @@ public class CapacitacionController {
         Capacitacion capacitacionFromDb = capacitacionService.findById(id);
         capacitacionService.delete(capacitacionFromDb.getId());
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("by_ced/{cedula}")
+    public List<Capacitacion> findByIdEst(@PathVariable String cedula) {
+
+        return capacitacionService.findByCedulaCapacitacions(cedula);
     }
 
 

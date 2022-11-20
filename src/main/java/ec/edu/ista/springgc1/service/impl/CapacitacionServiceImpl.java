@@ -96,4 +96,9 @@ public class CapacitacionServiceImpl extends GenericServiceImpl<Capacitacion> im
 
     public Optional<Capacitacion> findByInstitucion(String institucion) {return capacitacionRepository.findByInstitucion(institucion);}
 
+    public  List<Capacitacion> findByCedulaCapacitacions (String cedula){
+        return capacitacionRepository.findByCedulaCapacitacions(cedula);
+    }
+
+
 }

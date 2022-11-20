@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.rmi.server.ServerCloneException;
 import java.util.List;
 
 @CrossOrigin
@@ -70,6 +71,14 @@ public class PostulacionController {
         postulacionService.delete(postulacion.getId());
         return ResponseEntity.noContent().build();
     }
+
+
+    @GetMapping("by_est/{cedula}")
+    public List<Postulacion> findByIdEst(@PathVariable String cedula) {
+
+        return postulacionService.finByPostulacionEst_id(cedula);
+    }
+
 
 
 }
