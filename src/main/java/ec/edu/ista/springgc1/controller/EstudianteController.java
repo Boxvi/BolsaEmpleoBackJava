@@ -30,6 +30,11 @@ public class EstudianteController {
         return ResponseEntity.ok(estudianteService.findById(id));
     }
 
+    @GetMapping("/usuario/{id}")
+    ResponseEntity<?> findByUserId(@PathVariable Long id) {
+        return ResponseEntity.ok(estudianteService.findByUsuario(id));
+    }
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody EstudianteDTO estudianteDTO) {
 

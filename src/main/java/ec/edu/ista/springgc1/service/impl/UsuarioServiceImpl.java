@@ -73,6 +73,10 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements M
                 .orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
 
+    public Usuario findByUsername(String username) {
+        return usuarioRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("username", username));
+    }
+
     public Usuario update(long id, UsuarioDTO usuarioDTO) {
 
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id));

@@ -93,6 +93,13 @@ public class EstudianteServiceImpl extends GenericServiceImpl<Estudiante> implem
                 .orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
 
+    public EstudianteDTO findByUsuario(long usuario_id){
+
+        Estudiante estudiante = estudianteRepository.findByUsuario(usuario_id)
+                .orElseThrow(()-> new ResourceNotFoundException("usuario_id", usuario_id));
+        estudiante.setUrlImagen(estudiante.getRutaImagen() == null ? null : s3Service.getObjectUrl(estudiante.getRutaImagen()));
+        return mapToDTO(estudiante);
+    }
 
     public Optional<Estudiante> findByCedula (String cedula){
 
