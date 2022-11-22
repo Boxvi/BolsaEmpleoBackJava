@@ -27,7 +27,7 @@ public class ExperienciaController {
 
     @GetMapping("/{id}")
     ResponseEntity<?> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(experienciaService.findById(id));
+        return ResponseEntity.ok(experienciaService.findByIdToDTO(id));
     }
 
     @PostMapping

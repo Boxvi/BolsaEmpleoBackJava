@@ -20,5 +20,4 @@ public class PostulacionDTO implements Serializable {
     @NotEmpty
     private String cedula;
 
-
 }

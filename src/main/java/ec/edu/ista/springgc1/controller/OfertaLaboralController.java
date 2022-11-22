@@ -78,6 +78,12 @@ public class OfertaLaboralController {
 
 
 
+    @GetMapping("dto/{id}")
+    ResponseEntity<?> findByIdDTO(@PathVariable Long id) {
+        return ResponseEntity.ok(ofertaLaboralService.findByIdToDTO(id));
+    }
+
+
 
 
 

@@ -27,7 +27,7 @@ public class EmpresaController {
 
     @GetMapping("/{id}")
     ResponseEntity<?> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(empresaServiceImpl.findById(id));
+        return ResponseEntity.ok(empresaServiceImpl.findByIdToDTO(id));
     }
 
     @PostMapping

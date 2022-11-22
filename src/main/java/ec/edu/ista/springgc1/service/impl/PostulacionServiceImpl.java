@@ -68,8 +68,14 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
         postulacionDTO.setOfertalaboral_id(postulacion.getOfertaLaboral().getId());
         postulacionDTO.setCedula(postulacion.getEstudiante().getCedula());
 
+
+
+
         return postulacionDTO;
     }
+
+
+
 
     @Override
     public List findAll() {
@@ -87,6 +93,11 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
 
     public PostulacionDTO findByIdToDTO(long id) {
         return mapToDTO(postulacionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));
+    }
+
+    public List<Postulacion> finByPostulacionEst_id(String cedula){
+
+       return  postulacionRepository.finByPostulacionEst_id(cedula);
     }
 
 

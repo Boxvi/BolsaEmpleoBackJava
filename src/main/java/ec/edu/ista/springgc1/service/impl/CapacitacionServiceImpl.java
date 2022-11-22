@@ -40,10 +40,11 @@ public class CapacitacionServiceImpl extends GenericServiceImpl<Capacitacion> im
         Estudiante estudiante = estudianteRepository.findByCedula(capacitacionDTO.getCedula())
                 .orElseThrow(()-> new ResourceNotFoundException("cedula", capacitacionDTO.getCedula()));
 
-        AreaEstudio areaEstudio = areaEstudioRepository.findByNombre(capacitacionDTO.getNombre())
-                .orElseThrow(()-> new ResourceNotFoundException("nombre", capacitacionDTO.getNombre()));
+        AreaEstudio areaEstudio = areaEstudioRepository.findByNombre(capacitacionDTO.getArea_estudio())
+                .orElseThrow(()-> new ResourceNotFoundException("nombre", capacitacionDTO.getArea_estudio()));
 
         capacitacion.setId(capacitacionDTO.getId());
+        capacitacion.setNombre_capacitacion(capacitacionDTO.getNombre_capacitacion());
         capacitacion.setInstitucion(capacitacionDTO.getInstitucion());
         capacitacion.setTipoCapacitacion(capacitacionDTO.getTipoCapacitacion());
         capacitacion.setTipoCertificado(capacitacionDTO.getTipoCertificado());
@@ -67,7 +68,9 @@ public class CapacitacionServiceImpl extends GenericServiceImpl<Capacitacion> im
         capacitacionDTO.setFechaFin(capacitacion.getFechaFin());
         capacitacionDTO.setNumHoras(capacitacion.getNumHoras());
         capacitacionDTO.setCedula(capacitacion.getEstudiante().getCedula());
-        capacitacionDTO.setNombre(capacitacion.getAreaEstudio().getNombre());
+        capacitacionDTO.setNombre_capacitacion(capacitacion.getNombre_capacitacion());
+        capacitacionDTO.setArea_estudio(capacitacion.getAreaEstudio().getNombre());
+
         return capacitacionDTO;
     }
 
@@ -92,5 +95,10 @@ public class CapacitacionServiceImpl extends GenericServiceImpl<Capacitacion> im
 
 
     public Optional<Capacitacion> findByInstitucion(String institucion) {return capacitacionRepository.findByInstitucion(institucion);}
+
+    public  List<Capacitacion> findByCedulaCapacitacions (String cedula){
+        return capacitacionRepository.findByCedulaCapacitacions(cedula);
+    }
+
 
 }
