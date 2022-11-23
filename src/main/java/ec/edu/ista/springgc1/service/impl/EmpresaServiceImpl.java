@@ -9,13 +9,12 @@ import ec.edu.ista.springgc1.model.entity.Usuario;
 import ec.edu.ista.springgc1.repository.CiudadRepository;
 import ec.edu.ista.springgc1.repository.EmpresaRepository;
 import ec.edu.ista.springgc1.repository.SectorEmpresarialRepository;
-import ec.edu.ista.springgc1.repository.generic.UsuarioRepository;
+import ec.edu.ista.springgc1.repository.UsuarioRepository;
 import ec.edu.ista.springgc1.service.generic.impl.GenericServiceImpl;
 import ec.edu.ista.springgc1.service.map.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 

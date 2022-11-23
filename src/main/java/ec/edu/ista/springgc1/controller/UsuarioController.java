@@ -29,6 +29,10 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.findById(id));
     }
 
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(usuarioService.findByIdToDTO(id));
+    }
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody UsuarioDTO usuarioDTO) {
 

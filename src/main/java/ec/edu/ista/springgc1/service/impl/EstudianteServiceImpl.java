@@ -7,7 +7,7 @@ import ec.edu.ista.springgc1.model.entity.Estudiante;
 import ec.edu.ista.springgc1.model.entity.Usuario;
 import ec.edu.ista.springgc1.repository.CiudadRepository;
 import ec.edu.ista.springgc1.repository.EstudianteRepository;
-import ec.edu.ista.springgc1.repository.generic.UsuarioRepository;
+import ec.edu.ista.springgc1.repository.UsuarioRepository;
 import ec.edu.ista.springgc1.service.bucket.S3Service;
 import ec.edu.ista.springgc1.service.generic.impl.GenericServiceImpl;
 import ec.edu.ista.springgc1.service.map.Mapper;

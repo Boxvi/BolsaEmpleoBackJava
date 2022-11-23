@@ -6,7 +6,7 @@ import ec.edu.ista.springgc1.model.dto.UsuarioDTO;
 import ec.edu.ista.springgc1.model.entity.Rol;
 import ec.edu.ista.springgc1.model.entity.Usuario;
 import ec.edu.ista.springgc1.repository.RolRepository;
-import ec.edu.ista.springgc1.repository.generic.UsuarioRepository;
+import ec.edu.ista.springgc1.repository.UsuarioRepository;
 import ec.edu.ista.springgc1.service.generic.impl.GenericServiceImpl;
 import ec.edu.ista.springgc1.service.map.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
