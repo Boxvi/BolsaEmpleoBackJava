@@ -31,6 +31,11 @@ public class EducacionController {
         return ResponseEntity.ok(educacionService.findById(id));
     }
 
+    @GetMapping("/estudiante/{id}")
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
+        return ResponseEntity.ok(educacionService.findByEstudiante(id));
+    }
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody EducacionDTO educacionDTO ) {
         /*if (ciudadService.findByNombre(ciudadDTO.getNombre()).isPresent()){

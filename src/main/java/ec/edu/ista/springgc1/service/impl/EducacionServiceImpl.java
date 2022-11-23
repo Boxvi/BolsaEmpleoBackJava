@@ -90,6 +90,13 @@ public class EducacionServiceImpl extends GenericServiceImpl<Educacion> implemen
         return mapToDTO(educacionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
 
+    public List findByEstudiante(long estudiante_id){
+        return educacionRepository.findByEstudiante(estudiante_id)
+                .stream()
+                .map(e -> mapToDTO(e))
+                .collect(Collectors.toList());
+    }
+
     public Optional<Educacion> findByTitulo  (String titulo){
         return educacionRepository.findByTitulo(titulo);
     }
