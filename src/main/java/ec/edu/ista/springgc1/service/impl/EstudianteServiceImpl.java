@@ -89,8 +89,10 @@ public class EstudianteServiceImpl extends GenericServiceImpl<Estudiante> implem
     }
 
     public EstudianteDTO findByIdToDTO(Long id) {
-        return mapToDTO(estudianteRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("id", id)));
+        Estudiante estudiante = estudianteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("id", id));
+
+        return mapToDTO(estudiante);
     }
 
     public EstudianteDTO findByUsuario(long usuario_id){
