@@ -30,6 +30,12 @@ public class PerfilOcupacionalController {
         return ResponseEntity.ok(ocupacionalService.findById(id));
     }
 
+    @GetMapping("/estudiante/{id}")
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id){
+        return ResponseEntity.ok(ocupacionalService.finByEstudiante(id));
+    }
+
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody PerfilOcupacionalDTO perfilOcupacionalDTO) {
        /* if (ocupacionalService.findByNombre(ciudadDTO.getNombre()).isPresent()){

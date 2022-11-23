@@ -31,19 +31,19 @@ public class ReferenciaProfesionalController {
     ResponseEntity<?> findById(@PathVariable Long id) {
         return ResponseEntity.ok(referenciaProfesionalService.findById(id));}
 
+    @GetMapping("/estudiante/{id}")
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
+        return ResponseEntity.ok(referenciaProfesionalService.findByEstudiante(id));
+    }
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody ReferenciaProfesionalDTO referenciaProfesionalDTO){
 
-        if (referenciaProfesionalService.findByInstitucion(referenciaProfesionalDTO.getInstitucion()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado ya fue registrado");
-        }
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(referenciaProfesionalService.save(referenciaProfesionalDTO));
 
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody ReferenciaProfesionalDTO referenciaProfesionalDTO){

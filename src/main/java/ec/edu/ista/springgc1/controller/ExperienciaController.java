@@ -30,6 +30,12 @@ public class ExperienciaController {
         return ResponseEntity.ok(experienciaService.findByIdToDTO(id));
     }
 
+    @GetMapping("/estudiante/{id}")
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id){
+        return ResponseEntity.ok(experienciaService.findByEstudiante(id));
+    }
+
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody ExperienciaDTO experienciaDTO) {
        /* if (experienciaService.findByNombre(experienciaDTO.getNombre()).isPresent()){
@@ -65,6 +71,9 @@ public class ExperienciaController {
         experienciaService.delete(ciudadFromDb.getId());
         return ResponseEntity.noContent().build();
     }
+
+
+
 
 
 

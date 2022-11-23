@@ -49,6 +49,8 @@ public class ReferenciaPersonalServiceImpl extends GenericServiceImpl<Referencia
         referenciaPersonalDTO.setId(referenciaPersonal.getId());
         referenciaPersonalDTO.setNombre(referenciaPersonal.getNombre());
         referenciaPersonalDTO.setCedula(referenciaPersonal.getEstudiante().getCedula());
+        referenciaPersonalDTO.setTelefono(referenciaPersonal.getTelefono());
+
         return referenciaPersonalDTO;
     }
 
@@ -74,6 +76,12 @@ public class ReferenciaPersonalServiceImpl extends GenericServiceImpl<Referencia
     public ReferenciaPersonalDTO findByIdToDTO(long id) {
         return mapToDTO(referenciaPersonalRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));}
 
+    public List findByEstudiante(long estudiante_id){
+        return referenciaPersonalRepository.findByEstudiante(estudiante_id)
+                .stream()
+                .map(e -> mapToDTO(e))
+                .collect(Collectors.toList());
+    }
 
     public Optional<ReferenciaPersonal> findByNombre(String nombre){ return referenciaPersonalRepository.findByNombre(nombre);}
 

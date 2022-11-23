@@ -69,7 +69,13 @@ public class PreferenciaEmpleoServiceImpl extends GenericServiceImpl<Preferencia
         return empleoRepository.save(mapToEntity((PreferenciaEmpleoDTO) entity));
     }
 
+public List findByEstudiante (long estudiante_id){
 
+    return empleoRepository.findByEstudiante(estudiante_id)
+            .stream()
+            .map(c -> mapToDTO(c))
+            .collect(Collectors.toList());
+}
 
     public PreferenciaEmpleoDTO findByIdToDTO(long id) {
         return mapToDTO(empleoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));

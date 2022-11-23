@@ -88,6 +88,13 @@ public class CapacitacionServiceImpl extends GenericServiceImpl<Capacitacion> im
                 .orElseThrow(()-> new ResourceNotFoundException("id", id)));
     }
 
+    public List findByEstudiante(long estudiante_id){
+        return capacitacionRepository.findByEstudiante(estudiante_id)
+                .stream()
+                .map(e -> mapToDTO(e))
+                .collect(Collectors.toList());
+    }
+
     @Override
     public Capacitacion save(Object entity) {
         return capacitacionRepository.save(mapToEntity((CapacitacionDTO)  entity));
@@ -99,6 +106,7 @@ public class CapacitacionServiceImpl extends GenericServiceImpl<Capacitacion> im
     public  List<Capacitacion> findByCedulaCapacitacions (String cedula){
         return capacitacionRepository.findByCedulaCapacitacions(cedula);
     }
+
 
 
 }

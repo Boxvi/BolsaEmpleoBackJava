@@ -75,6 +75,13 @@ public class ReferenciaProfesionalServiceImpl extends GenericServiceImpl<Referen
                 .orElseThrow(()-> new ResourceNotFoundException("id", id)));
     }
 
+    public List findByEstudiante(long estudiante_id){
+        return referenciaProfesionalRepository.findByEstudiante(estudiante_id)
+                .stream()
+                .map(e -> mapToDTO(e))
+                .collect(Collectors.toList());
+    }
+
 
 
     public Optional<ReferenciaProfesional> findByInstitucion(String institucion){ return referenciaProfesionalRepository.findByInstitucion(institucion);}

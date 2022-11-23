@@ -18,6 +18,9 @@ public interface PostulacionRepository extends GenericRepository<Postulacion> {
     public List<Postulacion> finByPostulacionEst_id(String cedula);
 
 
+    /*@Query(value = "select * from postulaciones where estudiante_id =  :estudiante_id;")
+    public  List<Postulacion> findByEstudiante(long id);*/
+
 }
 
 
