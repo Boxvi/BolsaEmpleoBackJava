@@ -1,7 +1,7 @@
-package ec.edu.ista.springgc1.repository.generic;
+package ec.edu.ista.springgc1.repository;
 
 import ec.edu.ista.springgc1.model.entity.ContactoEmpresa;
-import ec.edu.ista.springgc1.model.entity.OfertaLaboral;
+import ec.edu.ista.springgc1.repository.generic.GenericRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ContactoEmpresaRepository extends GenericRepository<ContactoEmpresa>{
+public interface ContactoEmpresaRepository extends GenericRepository<ContactoEmpresa> {
 
     Optional<ContactoEmpresa> findByNombre(String nombre);
 

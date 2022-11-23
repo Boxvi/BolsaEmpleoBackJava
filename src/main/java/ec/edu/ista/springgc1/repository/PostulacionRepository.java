@@ -14,7 +14,7 @@ public interface PostulacionRepository extends GenericRepository<Postulacion> {
     public Integer thereIsAnApplicationFromThisStudentToThisOffer(String cedula, long oferta_id);
 
 
-    @Query(value = "select*from postulaciones p inner join estudiante e on p.estudiante_id = e.estudiante_id inner join usuario u on e.usuario_id = u.usuario_id where e.cedula= :cedula ;", nativeQuery = true)
+    @Query(value = "select * from postulaciones p inner join estudiante e on p.estudiante_id = e.estudiante_id inner join usuario u on e.usuario_id = u.usuario_id where e.cedula= :cedula ;", nativeQuery = true)
     public List<Postulacion> finByPostulacionEst_id(String cedula);
 
 

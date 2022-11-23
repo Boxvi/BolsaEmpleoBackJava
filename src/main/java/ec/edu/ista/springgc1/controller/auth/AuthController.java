@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 
 @CrossOrigin
 @RestController
@@ -60,6 +61,6 @@ public class AuthController {
         }
 
         usuarioService.save(usuarioDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Usuario Registrado");
+        return ResponseEntity.status(HttpStatus.CREATED).body(Collections.singletonMap("mensaje","Usuario Registrado"));
     }
 }

@@ -5,7 +5,7 @@ import ec.edu.ista.springgc1.model.dto.ContactoEmpresaDTO;
 import ec.edu.ista.springgc1.model.entity.ContactoEmpresa;
 import ec.edu.ista.springgc1.model.entity.Empresa;
 import ec.edu.ista.springgc1.repository.EmpresaRepository;
-import ec.edu.ista.springgc1.repository.generic.ContactoEmpresaRepository;
+import ec.edu.ista.springgc1.repository.ContactoEmpresaRepository;
 import ec.edu.ista.springgc1.service.generic.impl.GenericServiceImpl;
 import ec.edu.ista.springgc1.service.map.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
