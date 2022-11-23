@@ -36,7 +36,7 @@ public class ContactoEmpresaServiceImpl extends GenericServiceImpl<ContactoEmpre
         contactoEmpresa.setCargo(contactoEmpresaDTO.getCargo());
         contactoEmpresa.setTelefono(contactoEmpresaDTO.getTelefono());
         contactoEmpresa.setEmail(contactoEmpresaDTO.getEmail());
-         return contactoEmpresa;
+        return contactoEmpresa;
     }
 
     @Override
@@ -62,12 +62,19 @@ public class ContactoEmpresaServiceImpl extends GenericServiceImpl<ContactoEmpre
                 .collect(Collectors.toList());
     }
 
-    public ContactoEmpresaDTO findByIdToDTO(Long id){
-        return mapToDTO(contactoEmpresaRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("id",id)));
+    public List findByEmpresa(long empresa_id) {
+        return contactoEmpresaRepository.findByEmpresaId(empresa_id)
+                .stream()
+                .map(cm -> mapToDTO(cm))
+                .collect(Collectors.toList());
     }
 
-    public Optional<ContactoEmpresa> findByNombre(String nombre){
+    public ContactoEmpresaDTO findByIdToDTO(Long id) {
+        return mapToDTO(contactoEmpresaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("id", id)));
+    }
+
+    public Optional<ContactoEmpresa> findByNombre(String nombre) {
         return contactoEmpresaRepository.findByNombre(nombre);
     }
 

@@ -30,7 +30,15 @@ public class OfertaLaboralController {
         return ResponseEntity.ok(ofertaLaboralService.findById(id));
     }
 
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(ofertaLaboralService.findByIdToDTO(id));
+    }
 
+    @GetMapping("/empresa/{id}")
+    ResponseEntity<?> findByEmpresaId(@PathVariable Long id) {
+        return ResponseEntity.ok(ofertaLaboralService.findByEmpresa(id));
+    }
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody OfertaLaboralDTO ofertaLaboralDTO) {
 

@@ -31,7 +31,7 @@ public class EstudianteController {
     }
 
     @GetMapping("/resumen/{id}")
-    ResponseEntity<?> FindByIdResumen(@PathVariable Long id) {
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
         return ResponseEntity.ok(estudianteService.findByIdToDTO(id));
     }
 

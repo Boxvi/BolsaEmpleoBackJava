@@ -94,6 +94,11 @@ public class EmpresaServiceImpl extends GenericServiceImpl<Empresa> implements M
                 .orElseThrow(()-> new ResourceNotFoundException("id", id)));
     }
 
+    public EmpresaDTO findByUsuario(long usuario_id){
+        Empresa empresa = empresaRepository.findByUsuario(usuario_id).orElseThrow(() -> new ResourceNotFoundException("usuario_id",usuario_id));
+
+        return  mapToDTO(empresa);
+    }
     public Boolean existsByNombre(String nombre){
         return empresaRepository.existsByNombre(nombre);
     }

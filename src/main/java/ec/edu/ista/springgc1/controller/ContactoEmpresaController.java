@@ -31,10 +31,20 @@ public class ContactoEmpresaController {
         return ResponseEntity.ok(contactoEmpresaService.findById(id));
     }
 
+    @GetMapping("/empresa/{id}")
+    ResponseEntity<?> findByEmpresaId(@PathVariable Long id) {
+        return ResponseEntity.ok(contactoEmpresaService.findByEmpresa(id));
+    }
+
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(contactoEmpresaService.findByIdToDTO(id));
+    }
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody ContactoEmpresaDTO contactoEmpresaDTO) {
 
-        if (contactoEmpresaService.findByNombre(contactoEmpresaDTO.getNombre()).isPresent()){
+        if (contactoEmpresaService.findByNombre(contactoEmpresaDTO.getNombre()).isPresent()) {
             throw new AppException(HttpStatus.BAD_REQUEST, "Contacto ya registrado");
         }
 
@@ -45,7 +55,7 @@ public class ContactoEmpresaController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody ContactoEmpresaDTO contactoEmpresaDTO) {
         ContactoEmpresaDTO contactoFromDb = contactoEmpresaService.findByIdToDTO(id);
-        if (!contactoFromDb.getNombre().equalsIgnoreCase(contactoEmpresaDTO.getNombre()) && contactoEmpresaService.findByNombre(contactoEmpresaDTO.getNombre()).isPresent()){
+        if (!contactoFromDb.getNombre().equalsIgnoreCase(contactoEmpresaDTO.getNombre()) && contactoEmpresaService.findByNombre(contactoEmpresaDTO.getNombre()).isPresent()) {
             throw new AppException(HttpStatus.BAD_REQUEST, "Contacto ya registrado");
         }
 

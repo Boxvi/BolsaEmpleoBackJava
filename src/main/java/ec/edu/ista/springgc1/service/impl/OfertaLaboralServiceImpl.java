@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class OfertaLaboralServiceImpl extends GenericServiceImpl<OfertaLaboral>  implements Mapper<OfertaLaboral, OfertaLaboralDTO> {
+public class OfertaLaboralServiceImpl extends GenericServiceImpl<OfertaLaboral> implements Mapper<OfertaLaboral, OfertaLaboralDTO> {
 
     @Autowired
     private OfertaLaboralRepository ofertaLaboralRepository;
@@ -36,10 +36,10 @@ public class OfertaLaboralServiceImpl extends GenericServiceImpl<OfertaLaboral> 
         OfertaLaboral ofertaLaboral = new OfertaLaboral();
 
         Empresa empresa = empresaRepository.findByNombre(ofertaLaboralDTO.getEmpresa())
-                .orElseThrow(()-> new ResourceNotFoundException("nombre",ofertaLaboralDTO.getEmpresa()));
+                .orElseThrow(() -> new ResourceNotFoundException("nombre", ofertaLaboralDTO.getEmpresa()));
 
-        Ciudad  ciudad = ciudadRepository.findByNombre(ofertaLaboralDTO.getCiudad())
-                .orElseThrow(()-> new ResourceNotFoundException("nombre",ofertaLaboralDTO.getCiudad()));
+        Ciudad ciudad = ciudadRepository.findByNombre(ofertaLaboralDTO.getCiudad())
+                .orElseThrow(() -> new ResourceNotFoundException("nombre", ofertaLaboralDTO.getCiudad()));
 
 
         ofertaLaboral.setId(ofertaLaboralDTO.getId());
@@ -75,7 +75,7 @@ public class OfertaLaboralServiceImpl extends GenericServiceImpl<OfertaLaboral> 
         ofertaLaboralDTO.setUbicacion(ofertaLaboral.getUbicacion());
         ofertaLaboralDTO.setFecha_inicio(ofertaLaboral.getFecha_inicio());
         ofertaLaboralDTO.setFecha_fin(ofertaLaboral.getFecha_fin());
-        ofertaLaboralDTO.setCiudad( ofertaLaboral.getCiudad().getNombre());
+        ofertaLaboralDTO.setCiudad(ofertaLaboral.getCiudad().getNombre());
         ofertaLaboralDTO.setEmpresa(ofertaLaboral.getEmpresa().getNombre());
 
 
@@ -92,18 +92,24 @@ public class OfertaLaboralServiceImpl extends GenericServiceImpl<OfertaLaboral> 
                 .collect(Collectors.toList());
     }
 
+    public List findByEmpresa(long empresa_id) {
+        return ofertaLaboralRepository.findByEmpresaId(empresa_id)
+                .stream()
+                .map(em -> mapToDTO(em))
+                .collect(Collectors.toList());
+    }
+
     @Override
     public OfertaLaboral save(Object entity) {
         return ofertaLaboralRepository.save(mapToEntity((OfertaLaboralDTO) entity));
     }
 
 
-
     public OfertaLaboralDTO findByIdToDTO(long id) {
         return mapToDTO(ofertaLaboralRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
 
-    public Optional<OfertaLaboral> findByCargo(String cargo){
+    public Optional<OfertaLaboral> findByCargo(String cargo) {
 
         return ofertaLaboralRepository.findByCargo(cargo);
     }
