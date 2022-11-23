@@ -67,6 +67,12 @@ public class LogroServiceImpl extends GenericServiceImpl<Logro> implements Mappe
                 .orElseThrow(()-> new ResourceNotFoundException("id", id)));
     }
 
+    public List findByEstudiante(long estudiante_id){
+        return logroRepository.findByEstudiante(estudiante_id)
+                .stream()
+                .map(e -> mapToDTO(e))
+                .collect(Collectors.toList());
+    }
 
     @Override
     public Logro save(Object entity) {

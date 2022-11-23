@@ -31,6 +31,10 @@ public class ReferenciaProfesionalController {
     ResponseEntity<?> findById(@PathVariable Long id) {
         return ResponseEntity.ok(referenciaProfesionalService.findById(id));}
 
+    @GetMapping("/estudiante/{id}")
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
+        return ResponseEntity.ok(referenciaProfesionalService.findByEstudiante(id));
+    }
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody ReferenciaProfesionalDTO referenciaProfesionalDTO){

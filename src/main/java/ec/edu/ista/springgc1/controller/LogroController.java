@@ -34,6 +34,11 @@ public class LogroController {
     }
 
 
+    @GetMapping("/estudiante/{id}")
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
+        return ResponseEntity.ok(logroService.findByEstudiante(id));
+    }
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody LogroDTO logroDTO) {
 

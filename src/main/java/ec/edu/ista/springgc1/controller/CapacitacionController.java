@@ -31,6 +31,11 @@ public class CapacitacionController {
         return ResponseEntity.ok(capacitacionService.findByIdToDTO(id));
     }
 
+    @GetMapping("/estudiante/{id}")
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
+        return ResponseEntity.ok(capacitacionService.findByEstudiante(id));
+    }
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody CapacitacionDTO capacitacionDTO ) {
 
