@@ -49,6 +49,8 @@ public class ReferenciaPersonalServiceImpl extends GenericServiceImpl<Referencia
         referenciaPersonalDTO.setId(referenciaPersonal.getId());
         referenciaPersonalDTO.setNombre(referenciaPersonal.getNombre());
         referenciaPersonalDTO.setCedula(referenciaPersonal.getEstudiante().getCedula());
+        referenciaPersonalDTO.setTelefono(referenciaPersonal.getTelefono());
+
         return referenciaPersonalDTO;
     }
 

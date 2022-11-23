@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,9 +67,20 @@ public class PerfilOcupacionalServiceImpl extends GenericServiceImpl<PerfilOcupa
         return perfilOcupacionalRepository.save(mapToEntity((PerfilOcupacionalDTO) entity));
     }
 
+   public PerfilOcupacionalDTO finByEstudiante(long estudiante_id){
+
+        return mapToDTO(perfilOcupacionalRepository.findByEstudiante(estudiante_id).orElseThrow(() -> new ResourceNotFoundException("estudiante_id", estudiante_id)));
+    }
+
+
+
 
     public PerfilOcupacionalDTO findByIdToDTO(long id) {
         return mapToDTO(perfilOcupacionalRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
+
+
+
+
 }
 

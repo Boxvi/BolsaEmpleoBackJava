@@ -35,15 +35,11 @@ public class ReferenciaProfesionalController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody ReferenciaProfesionalDTO referenciaProfesionalDTO){
 
-        if (referenciaProfesionalService.findByInstitucion(referenciaProfesionalDTO.getInstitucion()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado ya fue registrado");
-        }
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(referenciaProfesionalService.save(referenciaProfesionalDTO));
 
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody ReferenciaProfesionalDTO referenciaProfesionalDTO){

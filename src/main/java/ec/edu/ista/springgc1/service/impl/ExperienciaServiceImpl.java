@@ -81,6 +81,14 @@ public class ExperienciaServiceImpl extends GenericServiceImpl<Experiencia> impl
     }
 
 
+    public List findByEstudiante(long estudiante_id){
+        return experienciaRepository.findByEstudiante(estudiante_id)
+                .stream()
+                .map(e-> mapToDTO(e))
+                .collect(Collectors.toList());
+    }
+
+
     public ExperienciaDTO findByIdToDTO(long id) {
         return mapToDTO(experienciaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }

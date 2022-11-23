@@ -36,6 +36,14 @@ public class PreferenciaEmpleoController {
                 .body(empleoService.save(empleoDTO));
     }
 
+    @GetMapping("/estudiante/{id}")
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id){
+
+        return ResponseEntity.ok(empleoService.findByEstudiante(id));
+    }
+
+
+
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody PreferenciaEmpleoDTO empleoDTO) {
         //EducacionDTO educacionFronmDb = empleoService.findById(id);
