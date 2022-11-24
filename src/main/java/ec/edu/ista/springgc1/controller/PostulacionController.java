@@ -31,6 +31,17 @@ public class PostulacionController {
         return ResponseEntity.ok(postulacionService.findById(id));
     }
 
+    @GetMapping("/estudiante/{id}")
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
+
+        return ResponseEntity.ok(postulacionService.findByEstudianteId(id));
+    }
+
+    @GetMapping("/empresa/{id}")
+    ResponseEntity<?> findByEmpresaId(@PathVariable Long id) {
+
+        return ResponseEntity.ok(postulacionService.findByEmpresaId(id));
+    }
     @GetMapping("/resumen/{id}")
     ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
         return ResponseEntity.ok(postulacionService.findByIdToDTO(id));
@@ -70,9 +81,9 @@ public class PostulacionController {
 
 
     @GetMapping("by_est/{cedula}")
-    public List<Postulacion> findByIdEst(@PathVariable String cedula) {
+    public ResponseEntity<?>findByEstudianteCedula(@PathVariable String cedula) {
 
-        return postulacionService.finByPostulacionEst_id(cedula);
+        return ResponseEntity.ok(postulacionService.finByPostulacionEstCedula(cedula));
     }
 
 

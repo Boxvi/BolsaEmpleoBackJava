@@ -69,12 +69,8 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
         postulacionDTO.setCedula(postulacion.getEstudiante().getCedula());
 
 
-
-
         return postulacionDTO;
     }
-
-
 
 
     @Override
@@ -95,9 +91,26 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
         return mapToDTO(postulacionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
 
-    public List<Postulacion> finByPostulacionEst_id(String cedula){
+    public List<PostulacionDTO> finByPostulacionEstCedula(String cedula) {
 
-       return  postulacionRepository.finByPostulacionEst_id(cedula);
+        return postulacionRepository.finByPostulacionEstCedula(cedula)
+                .stream()
+                .map(postulacion -> mapToDTO(postulacion))
+                .collect(Collectors.toList());
+    }
+
+    public List<PostulacionDTO> findByEstudianteId(long estudiante_id) {
+        return postulacionRepository.findByEstudianteID(estudiante_id)
+                .stream()
+                .map(postulacion -> mapToDTO(postulacion))
+                .collect(Collectors.toList());
+    }
+
+    public List<PostulacionDTO> findByEmpresaId(long empresa_id){
+        return postulacionRepository.findByEmpresaID(empresa_id)
+                .stream()
+                .map(postulacion -> mapToDTO(postulacion))
+                .collect(Collectors.toList());
     }
 
 

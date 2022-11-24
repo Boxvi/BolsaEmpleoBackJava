@@ -15,11 +15,13 @@ public interface PostulacionRepository extends GenericRepository<Postulacion> {
 
 
     @Query(value = "select * from postulaciones p inner join estudiante e on p.estudiante_id = e.estudiante_id inner join usuario u on e.usuario_id = u.usuario_id where e.cedula= :cedula ;", nativeQuery = true)
-    public List<Postulacion> finByPostulacionEst_id(String cedula);
+    public List<Postulacion> finByPostulacionEstCedula(String cedula);
 
+    @Query(value = "select * from postulaciones where estudiante_id = :estudiante_id;", nativeQuery = true)
+    public  List<Postulacion> findByEstudianteID(long estudiante_id);
 
-    /*@Query(value = "select * from postulaciones where estudiante_id =  :estudiante_id;")
-    public  List<Postulacion> findByEstudiante(long id);*/
+    @Query(value = "select p.* from postulaciones p inner join ofertaslaborales ol on p.oferta_id = ol.oferta_id inner join empresa e on ol.emp_id = e.emp_id where e.emp_id = :empresa_id;",nativeQuery = true)
+    public  List<Postulacion> findByEmpresaID(long empresa_id);
 
 }
 
