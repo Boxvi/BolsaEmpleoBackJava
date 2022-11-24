@@ -42,9 +42,7 @@ public class LogroController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody LogroDTO logroDTO) {
 
-        if (logroService.findByTipoLogro(logroDTO.getTipoLogro()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"El Tipo de Logro ingresado ya fue registrado");
-        }
+
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(logroService.save(logroDTO));
@@ -57,9 +55,6 @@ public class LogroController {
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody LogroDTO logroDTO) {
 
         LogroDTO logroFromDb = logroService.findByIdToDTO(id);
-        if (!logroDTO.getTipoLogro().equalsIgnoreCase(logroFromDb.getTipoLogro()) && logroService.findByTipoLogro(logroDTO.getTipoLogro()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"el Tipo de Logro ingresado ya fue registrado");
-        }
 
         logroFromDb.setTipoLogro(logroDTO.getTipoLogro());
         logroFromDb.setDescripcion(logroDTO.getDescripcion());

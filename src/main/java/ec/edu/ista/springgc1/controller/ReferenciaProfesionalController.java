@@ -54,9 +54,7 @@ public class ReferenciaProfesionalController {
 
         ReferenciaProfesionalDTO referenciaProfesionalFromDb = referenciaProfesionalService.findByIdToDTO(id);
 
-        if (!referenciaProfesionalDTO.getInstitucion().equalsIgnoreCase(referenciaProfesionalFromDb.getInstitucion()) && referenciaProfesionalService.findByInstitucion(referenciaProfesionalDTO.getInstitucion()).isPresent() ){
-            throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado ya fue registrado");
-        }
+
 
         referenciaProfesionalFromDb.setInstitucion(referenciaProfesionalDTO.getInstitucion());
         referenciaProfesionalFromDb.setNombre(referenciaProfesionalDTO.getNombre());

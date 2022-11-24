@@ -44,9 +44,7 @@ public class ReferenciaPersonalController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody ReferenciaPersonalDTO referenciaPersonalDTO) {
 
-        if (referenciaPersonalService.findByNombre(referenciaPersonalDTO.getNombre()).isPresent()) {
-            throw new AppException(HttpStatus.BAD_REQUEST, "La Referencia Personal que ingreso ya encuentra registrado");
-        }
+
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(referenciaPersonalService.save(referenciaPersonalDTO));
@@ -57,10 +55,6 @@ public class ReferenciaPersonalController {
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody ReferenciaPersonalDTO referenciaPersonalDTO) {
 
         ReferenciaPersonalDTO referenciaPersonalFromDb = referenciaPersonalService.findByIdToDTO(id);
-
-        if (!referenciaPersonalDTO.getNombre().equalsIgnoreCase(referenciaPersonalFromDb.getNombre()) && referenciaPersonalService.findByNombre(referenciaPersonalDTO.getNombre()).isPresent()) {
-            throw new AppException(HttpStatus.BAD_REQUEST, "La referencia Personal ingresado ya fue registrado");
-        }
 
         referenciaPersonalFromDb.setNombre(referenciaPersonalDTO.getNombre());
         referenciaPersonalFromDb.setTelefono(referenciaPersonalDTO.getTelefono());
