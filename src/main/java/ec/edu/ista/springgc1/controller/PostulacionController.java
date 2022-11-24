@@ -20,9 +20,6 @@ public class PostulacionController {
 
     @Autowired
     private PostulacionServiceImpl postulacionService;
-    @Autowired
-    private EstudianteServiceImpl estudianteService;
-
 
     @GetMapping
     ResponseEntity<List<?>> list() {
@@ -34,7 +31,10 @@ public class PostulacionController {
         return ResponseEntity.ok(postulacionService.findById(id));
     }
 
-
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(postulacionService.findByIdToDTO(id));
+    }
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody PostulacionDTO postulacionDTO) {
       /*  if ( estudianteService.findByCedula(postulacionDTO.getCedula()).isPresent()){
@@ -48,10 +48,6 @@ public class PostulacionController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody PostulacionDTO postulacionDTO) {
         PostulacionDTO postulacionFromDb = postulacionService.findByIdToDTO(id);
-       /* if (estudianteService.existsByCedula(postulacionFromDb.getCedula())){
-            throw new AppException(HttpStatus.BAD_REQUEST,"Ya te has postulado a esta oferta");
-        }*/
-
         postulacionFromDb.setFecha(postulacionDTO.getFecha());
         postulacionFromDb.setEstado(postulacionDTO.getEstado());
         postulacionFromDb.setOfertalaboral_id (postulacionDTO.getOfertalaboral_id());

@@ -21,16 +21,20 @@ public class ReferenciaPersonalController {
     @Autowired
     private ReferenciaPersonalServiceImpl referenciaPersonalService;
 
-    @Autowired
-    private EstudianteServiceImpl estudianteService;
-
     @GetMapping
     ResponseEntity<List<?>> list() {
-        return ResponseEntity.ok(referenciaPersonalService.findAll());}
+        return ResponseEntity.ok(referenciaPersonalService.findAll());
+    }
 
     @GetMapping("/{id}")
     ResponseEntity<?> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(referenciaPersonalService.findByIdToDTO(id));}
+        return ResponseEntity.ok(referenciaPersonalService.findByIdToDTO(id));
+    }
+
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(referenciaPersonalService.findByIdToDTO(id));
+    }
 
     @GetMapping("/estudiante/{id}")
     ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
@@ -40,8 +44,8 @@ public class ReferenciaPersonalController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody ReferenciaPersonalDTO referenciaPersonalDTO) {
 
-        if (referenciaPersonalService.findByNombre(referenciaPersonalDTO.getNombre()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"La Referencia Personal que ingreso ya encuentra registrado");
+        if (referenciaPersonalService.findByNombre(referenciaPersonalDTO.getNombre()).isPresent()) {
+            throw new AppException(HttpStatus.BAD_REQUEST, "La Referencia Personal que ingreso ya encuentra registrado");
         }
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -50,12 +54,12 @@ public class ReferenciaPersonalController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody ReferenciaPersonalDTO referenciaPersonalDTO){
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody ReferenciaPersonalDTO referenciaPersonalDTO) {
 
         ReferenciaPersonalDTO referenciaPersonalFromDb = referenciaPersonalService.findByIdToDTO(id);
 
-        if (!referenciaPersonalDTO.getNombre().equalsIgnoreCase(referenciaPersonalFromDb.getNombre()) && referenciaPersonalService.findByNombre(referenciaPersonalDTO.getNombre()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"La referencia Personal ingresado ya fue registrado");
+        if (!referenciaPersonalDTO.getNombre().equalsIgnoreCase(referenciaPersonalFromDb.getNombre()) && referenciaPersonalService.findByNombre(referenciaPersonalDTO.getNombre()).isPresent()) {
+            throw new AppException(HttpStatus.BAD_REQUEST, "La referencia Personal ingresado ya fue registrado");
         }
 
         referenciaPersonalFromDb.setNombre(referenciaPersonalDTO.getNombre());

@@ -29,6 +29,11 @@ public class PreferenciaEmpleoController {
         return ResponseEntity.ok(empleoService.findById(id));
     }
 
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(empleoService.findByIdToDTO(id));
+    }
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody PreferenciaEmpleoDTO empleoDTO) {
 
@@ -37,11 +42,10 @@ public class PreferenciaEmpleoController {
     }
 
     @GetMapping("/estudiante/{id}")
-    ResponseEntity<?> findByEstudianteId(@PathVariable Long id){
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
 
         return ResponseEntity.ok(empleoService.findByEstudiante(id));
     }
-
 
 
     @PutMapping("/{id}")

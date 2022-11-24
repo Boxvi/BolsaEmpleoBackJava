@@ -30,11 +30,10 @@ public class EmpresaController {
         return ResponseEntity.ok(empresaServiceImpl.findById(id));
     }
 
-    @GetMapping("/usuario/{id}")
-    ResponseEntity<?> findByUserId(@PathVariable Long id) {
-        return ResponseEntity.ok(empresaServiceImpl.findByUsuario(id));
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(empresaServiceImpl.findByIdToDTO(id));
     }
-
     @GetMapping("/usuario/{id}")
     ResponseEntity<?> findByUserId(@PathVariable Long id) {
         return ResponseEntity.ok(empresaServiceImpl.findByUsuario(id));

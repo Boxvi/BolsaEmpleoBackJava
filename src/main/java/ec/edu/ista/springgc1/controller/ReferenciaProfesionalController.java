@@ -31,6 +31,10 @@ public class ReferenciaProfesionalController {
     ResponseEntity<?> findById(@PathVariable Long id) {
         return ResponseEntity.ok(referenciaProfesionalService.findById(id));}
 
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(referenciaProfesionalService.findByIdToDTO(id));
+    }
     @GetMapping("/estudiante/{id}")
     ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
         return ResponseEntity.ok(referenciaProfesionalService.findByEstudiante(id));

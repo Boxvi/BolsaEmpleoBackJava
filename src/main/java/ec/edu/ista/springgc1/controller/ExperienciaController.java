@@ -29,7 +29,10 @@ public class ExperienciaController {
     ResponseEntity<?> findById(@PathVariable Long id) {
         return ResponseEntity.ok(experienciaService.findByIdToDTO(id));
     }
-
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(experienciaService.findByIdToDTO(id));
+    }
     @GetMapping("/estudiante/{id}")
     ResponseEntity<?> findByEstudianteId(@PathVariable Long id){
         return ResponseEntity.ok(experienciaService.findByEstudiante(id));

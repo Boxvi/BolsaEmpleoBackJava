@@ -3,7 +3,6 @@ package ec.edu.ista.springgc1.controller;
 import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.dto.LogroDTO;
 import ec.edu.ista.springgc1.model.entity.Logro;
-import ec.edu.ista.springgc1.service.impl.EstudianteServiceImpl;
 import ec.edu.ista.springgc1.service.impl.LogroServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +20,6 @@ public class LogroController {
     @Autowired
     private LogroServiceImpl logroService;
 
-    @Autowired
-    private EstudianteServiceImpl estudianteService;
 
     @GetMapping
     ResponseEntity<List<?>> list() {
@@ -33,7 +30,10 @@ public class LogroController {
         return ResponseEntity.ok(logroService.findById(id));
     }
 
-
+    @GetMapping("/resumen/{id}")
+    ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
+        return ResponseEntity.ok(logroService.findByIdToDTO(id));
+    }
     @GetMapping("/estudiante/{id}")
     ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
         return ResponseEntity.ok(logroService.findByEstudiante(id));
