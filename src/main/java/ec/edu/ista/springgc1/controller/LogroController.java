@@ -41,6 +41,7 @@ public class LogroController {
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody LogroDTO logroDTO) {
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(logroService.save(logroDTO));
     }

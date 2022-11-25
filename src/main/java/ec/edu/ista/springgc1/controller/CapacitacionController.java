@@ -39,9 +39,7 @@ public class CapacitacionController {
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody CapacitacionDTO capacitacionDTO ) {
 
-        if (capacitacionService.findByInstitucion(capacitacionDTO.getInstitucion()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"La institucion ya se encuentra registrado");
-        }
+
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(capacitacionService.save(capacitacionDTO));
@@ -50,10 +48,6 @@ public class CapacitacionController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody CapacitacionDTO capacitacionDTO) {
         CapacitacionDTO capacitacionFromDb = capacitacionService.findByIdToDTO(id);
-
-        if (!capacitacionDTO.getInstitucion().equalsIgnoreCase(capacitacionFromDb.getInstitucion()) && capacitacionService.findByInstitucion(capacitacionDTO.getInstitucion()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"el dato ingresado ya fue registrado");
-        }
 
         capacitacionFromDb.setInstitucion(capacitacionDTO.getInstitucion());
         capacitacionFromDb.setTipoCapacitacion(capacitacionDTO.getTipoCapacitacion());
