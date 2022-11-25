@@ -81,6 +81,10 @@ public List findByEstudiante (long estudiante_id){
         return mapToDTO(empleoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id)));
     }
 
+    public Integer existAlreadyAPreferenciaEmpleoWithThisDNI(String cedula){
+        return empleoRepository.existAlreadyAPreferenciaEmpleoWithThisDNI(cedula);
+    }
+
 
 
 }

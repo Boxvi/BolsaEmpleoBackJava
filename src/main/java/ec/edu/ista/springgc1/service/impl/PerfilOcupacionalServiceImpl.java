@@ -72,7 +72,9 @@ public class PerfilOcupacionalServiceImpl extends GenericServiceImpl<PerfilOcupa
         return mapToDTO(perfilOcupacionalRepository.findByEstudiante(estudiante_id).orElseThrow(() -> new ResourceNotFoundException("estudiante_id", estudiante_id)));
     }
 
-
+    public Integer alreadyExistsAPerfilOcupacionalRegisteredByDNI(String cedula){
+        return perfilOcupacionalRepository.existsAlreadyAPerfilOcupacionalwithThisDNI(cedula);
+    }
 
 
     public PerfilOcupacionalDTO findByIdToDTO(long id) {

@@ -1,6 +1,7 @@
 package ec.edu.ista.springgc1.controller;
 
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.dto.PerfilOcupacionalDTO;
 import ec.edu.ista.springgc1.model.entity.PerfilOcupacional;
 import ec.edu.ista.springgc1.service.impl.PerfilOcupacionalServiceImpl;
@@ -34,18 +35,19 @@ public class PerfilOcupacionalController {
     ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
         return ResponseEntity.ok(ocupacionalService.findByIdToDTO(id));
     }
+
     @GetMapping("/estudiante/{id}")
-    ResponseEntity<?> findByEstudianteId(@PathVariable Long id){
+    ResponseEntity<?> findByEstudianteId(@PathVariable Long id) {
         return ResponseEntity.ok(ocupacionalService.finByEstudiante(id));
     }
 
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody PerfilOcupacionalDTO perfilOcupacionalDTO) {
-       /* if (ocupacionalService.findByNombre(ciudadDTO.getNombre()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"Ya se encuentra registrado la Ciudad");
+
+        if (ocupacionalService.alreadyExistsAPerfilOcupacionalRegisteredByDNI(perfilOcupacionalDTO.getCedula()) != 0) {
+            throw new AppException(HttpStatus.BAD_REQUEST, "Ya existe un perfil ocupacional registrado para este estudiante");
         }
-*/
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ocupacionalService.save(perfilOcupacionalDTO));
     }
@@ -53,9 +55,9 @@ public class PerfilOcupacionalController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody PerfilOcupacionalDTO perfilOcupacionalDTO) {
         PerfilOcupacionalDTO perfilFromDb = ocupacionalService.findByIdToDTO(id);
-       /* if (!ciudadDTO.getNombre().equalsIgnoreCase(ciudadFromDb.getNombre()) && ocupacionalService.findByNombre(ciudadDTO.getNombre()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"Ya se encuentra registrado la Ciudad");
-        }*/
+        if (!perfilFromDb.getCedula().equals(perfilOcupacionalDTO.getCedula()) && ocupacionalService.alreadyExistsAPerfilOcupacionalRegisteredByDNI(perfilOcupacionalDTO.getCedula()) != 0) {
+            throw new AppException(HttpStatus.BAD_REQUEST, "Ya existe un perfil ocupacional registrado con esta cédula");
+        }
         perfilFromDb.setHabilidades(perfilOcupacionalDTO.getHabilidades());
         perfilFromDb.setActitudes(perfilOcupacionalDTO.getActitudes());
         perfilFromDb.setDestrezas(perfilOcupacionalDTO.getDestrezas());

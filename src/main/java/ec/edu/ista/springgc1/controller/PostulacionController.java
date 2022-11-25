@@ -57,9 +57,7 @@ public class PostulacionController {
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody PostulacionDTO postulacionDTO) {
-      /*  if ( estudianteService.findByCedula(postulacionDTO.getCedula()).isPresent()){
-            throw new AppException(HttpStatus.BAD_REQUEST,"Ya te has postulado a esta oferta");
-        }*/
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(postulacionService.save(postulacionDTO));
     }

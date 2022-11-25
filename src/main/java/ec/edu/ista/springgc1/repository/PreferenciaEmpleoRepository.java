@@ -13,4 +13,7 @@ public interface PreferenciaEmpleoRepository  extends GenericRepository<Preferen
     @Query(value = "select * from preferencia_empleos where estudiante_id = :estudiante_id ;",nativeQuery = true)
      List<PreferenciaEmpleo> findByEstudiante(long estudiante_id);
 
+    @Query(value = "SELECT CASE WHEN EXISTS (select pe.* from preferencia_empleos pe inner join estudiante e on pe.estudiante_id = e.estudiante_id where e.cedula = :cedula)THEN 1 ELSE 0 END",nativeQuery = true)
+    Integer existAlreadyAPreferenciaEmpleoWithThisDNI(String cedula);
+
 }
