@@ -14,7 +14,7 @@ public interface ReferenciaProfesionalRepository extends GenericRepository<Refer
 
     Optional<ReferenciaProfesional> findByInstitucion(String institucion);
 
-    @Query(value = "select * from referenciaProfesional where estudiante_id = :estudiante_id", nativeQuery = true)
+    @Query(value = "select * from referencia_profesional where estudiante_id = :estudiante_id", nativeQuery = true)
     List<ReferenciaProfesional> findByEstudiante(long estudiante_id);
 
 
