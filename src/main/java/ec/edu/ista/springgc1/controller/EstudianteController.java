@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin
@@ -35,11 +36,20 @@ public class EstudianteController {
         return ResponseEntity.ok(estudianteService.findByIdToDTO(id));
     }
 
+    @GetMapping("/cedula/{cedula}")
+    ResponseEntity<?> findByCedulaResumen(@PathVariable String cedula) {
+        return ResponseEntity.ok(estudianteService.findByCedulaToDTO(cedula));
+    }
+
     @GetMapping("/usuario/{id}")
     ResponseEntity<?> findByUserId(@PathVariable Long id) {
         return ResponseEntity.ok(estudianteService.findByUsuario(id));
     }
 
+    @GetMapping("/total")
+    ResponseEntity<?> countEstudiantes() {
+        return ResponseEntity.ok(Collections.singletonMap("total", estudianteService.count()));
+    }
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody EstudianteDTO estudianteDTO) {
 

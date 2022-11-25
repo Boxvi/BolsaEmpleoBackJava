@@ -114,5 +114,16 @@ public class OfertaLaboralServiceImpl extends GenericServiceImpl<OfertaLaboral> 
         return ofertaLaboralRepository.findByCargo(cargo);
     }
 
+    public List findByCargoIgnoringCase(String cargo) {
+        return ofertaLaboralRepository.findByCargoContaining(cargo)
+                .stream()
+                .map(ofertaLaboral -> mapToDTO(ofertaLaboral))
+                .collect(Collectors.toList());
+    }
+
+    public Long countOfertas() {
+        return ofertaLaboralRepository.count();
+    }
+
 }
 

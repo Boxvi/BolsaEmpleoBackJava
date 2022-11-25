@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin
@@ -37,6 +38,11 @@ public class EmpresaController {
     @GetMapping("/usuario/{id}")
     ResponseEntity<?> findByUserId(@PathVariable Long id) {
         return ResponseEntity.ok(empresaServiceImpl.findByUsuario(id));
+    }
+
+    @GetMapping("/total")
+    ResponseEntity<?> countEmpresas() {
+        return ResponseEntity.ok(Collections.singletonMap("total",empresaServiceImpl.countEmpresas()));
     }
 
     @PostMapping

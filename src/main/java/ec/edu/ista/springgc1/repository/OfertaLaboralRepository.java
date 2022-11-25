@@ -17,4 +17,7 @@ public interface OfertaLaboralRepository extends GenericRepository<OfertaLaboral
     @Query(value = "select * from ofertaslaborales where emp_id = :empresa_id", nativeQuery = true)
     List<OfertaLaboral> findByEmpresaId(long empresa_id);
 
+
+    List<OfertaLaboral> findByCargoContaining(String cargo);
+
 }

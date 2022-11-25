@@ -54,7 +54,7 @@ public class EstudianteServiceImpl extends GenericServiceImpl<Estudiante> implem
         estudiante.setDireccion(estudianteDTO.getDireccion());
         estudiante.setEstadoCivil(estudianteDTO.getEstadoCivil());
         estudiante.setRutaImagen(estudianteDTO.getRutaImagen());
-        estudiante.setUrlImagen(estudianteDTO.getRutaImagen()==null?null: s3Service.getObjectUrl(estudianteDTO.getRutaImagen()));
+        estudiante.setUrlImagen(estudianteDTO.getRutaImagen() == null ? null : s3Service.getObjectUrl(estudianteDTO.getRutaImagen()));
 
         return estudiante;
     }
@@ -95,25 +95,35 @@ public class EstudianteServiceImpl extends GenericServiceImpl<Estudiante> implem
         return mapToDTO(estudiante);
     }
 
-    public EstudianteDTO findByUsuario(long usuario_id){
+    public EstudianteDTO findByUsuario(long usuario_id) {
 
         Estudiante estudiante = estudianteRepository.findByUsuario(usuario_id)
-                .orElseThrow(()-> new ResourceNotFoundException("usuario_id", usuario_id));
+                .orElseThrow(() -> new ResourceNotFoundException("usuario_id", usuario_id));
         estudiante.setUrlImagen(estudiante.getRutaImagen() == null ? null : s3Service.getObjectUrl(estudiante.getRutaImagen()));
         return mapToDTO(estudiante);
     }
 
-    public Optional<Estudiante> findByCedula (String cedula){
+    public Optional<Estudiante> findByCedula(String cedula) {
 
         return estudianteRepository.findByCedula(cedula);
     }
-    public Boolean existsByCedula(String cedula){
+
+    public Boolean existsByCedula(String cedula) {
         return estudianteRepository.existsByCedula(cedula);
+    }
+
+    public EstudianteDTO findByCedulaToDTO(String cedula) {
+        Estudiante estudiante = estudianteRepository.findByCedula(cedula).orElseThrow(() -> new ResourceNotFoundException("cedula", cedula));
+        return mapToDTO(estudiante);
     }
 
     @Override
     public Estudiante save(Object entity) {
 
         return estudianteRepository.save(mapToEntity((EstudianteDTO) entity));
+    }
+
+    public Long countEstudiantes(){
+        return estudianteRepository.count();
     }
 }

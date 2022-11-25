@@ -109,4 +109,8 @@ public class EmpresaServiceImpl extends GenericServiceImpl<Empresa> implements M
     public Empresa save(Object entity) {
         return empresaRepository.save(mapToEntity((EmpresaDTO) entity));
     }
+
+    public Long countEmpresas(){
+        return empresaRepository.count();
+    }
 }

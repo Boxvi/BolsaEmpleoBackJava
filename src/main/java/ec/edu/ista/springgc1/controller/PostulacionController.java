@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.rmi.server.ServerCloneException;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin
@@ -37,15 +38,23 @@ public class PostulacionController {
         return ResponseEntity.ok(postulacionService.findByEstudianteId(id));
     }
 
+    @GetMapping("/total")
+    ResponseEntity<?> countPosutlaciones() {
+
+        return ResponseEntity.ok(Collections.singletonMap("total", postulacionService.count()));
+    }
+
     @GetMapping("/empresa/{id}")
     ResponseEntity<?> findByEmpresaId(@PathVariable Long id) {
 
         return ResponseEntity.ok(postulacionService.findByEmpresaId(id));
     }
+
     @GetMapping("/resumen/{id}")
     ResponseEntity<?> findByIdResumen(@PathVariable Long id) {
         return ResponseEntity.ok(postulacionService.findByIdToDTO(id));
     }
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody PostulacionDTO postulacionDTO) {
       /*  if ( estudianteService.findByCedula(postulacionDTO.getCedula()).isPresent()){
@@ -61,10 +70,8 @@ public class PostulacionController {
         PostulacionDTO postulacionFromDb = postulacionService.findByIdToDTO(id);
         postulacionFromDb.setFecha(postulacionDTO.getFecha());
         postulacionFromDb.setEstado(postulacionDTO.getEstado());
-        postulacionFromDb.setOfertalaboral_id (postulacionDTO.getOfertalaboral_id());
+        postulacionFromDb.setOfertalaboral_id(postulacionDTO.getOfertalaboral_id());
         postulacionFromDb.setCedula(postulacionDTO.getCedula());
-
-
 
 
         return ResponseEntity.status(HttpStatus.CREATED).body(postulacionService.save(postulacionFromDb));
@@ -73,7 +80,7 @@ public class PostulacionController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
 
-        Postulacion postulacion= postulacionService.findById(id);
+        Postulacion postulacion = postulacionService.findById(id);
 
         postulacionService.delete(postulacion.getId());
         return ResponseEntity.noContent().build();
@@ -81,11 +88,10 @@ public class PostulacionController {
 
 
     @GetMapping("by_est/{cedula}")
-    public ResponseEntity<?>findByEstudianteCedula(@PathVariable String cedula) {
+    public ResponseEntity<?> findByEstudianteCedula(@PathVariable String cedula) {
 
         return ResponseEntity.ok(postulacionService.finByPostulacionEstCedula(cedula));
     }
-
 
 
 }

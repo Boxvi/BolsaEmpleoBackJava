@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin
@@ -39,6 +40,17 @@ public class OfertaLaboralController {
     ResponseEntity<?> findByEmpresaId(@PathVariable Long id) {
         return ResponseEntity.ok(ofertaLaboralService.findByEmpresa(id));
     }
+
+    @GetMapping("/cargo/{cargo}")
+    ResponseEntity<?> findByCargo(@PathVariable String cargo) {
+        return ResponseEntity.ok(ofertaLaboralService.findByCargoIgnoringCase(cargo));
+    }
+
+    @GetMapping("/total")
+    ResponseEntity<?> countOfertas() {
+        return ResponseEntity.ok(Collections.singletonMap("total", ofertaLaboralService.countOfertas()));
+    }
+
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody OfertaLaboralDTO ofertaLaboralDTO) {
 
@@ -72,27 +84,20 @@ public class OfertaLaboralController {
     }
 
 
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
 
-        OfertaLaboral ofertaLaboral= ofertaLaboralService.findById(id);
+        OfertaLaboral ofertaLaboral = ofertaLaboralService.findById(id);
 
         ofertaLaboralService.delete(ofertaLaboral.getId());
         return ResponseEntity.noContent().build();
     }
 
 
-
-
     @GetMapping("dto/{id}")
     ResponseEntity<?> findByIdDTO(@PathVariable Long id) {
         return ResponseEntity.ok(ofertaLaboralService.findByIdToDTO(id));
     }
-
-
-
 
 
 }
