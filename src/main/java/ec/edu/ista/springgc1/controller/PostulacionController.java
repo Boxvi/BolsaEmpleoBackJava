@@ -1,5 +1,6 @@
 package ec.edu.ista.springgc1.controller;
 
+import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.dto.PostulacionDTO;
 import ec.edu.ista.springgc1.model.entity.Postulacion;
 import ec.edu.ista.springgc1.service.impl.EstudianteServiceImpl;
@@ -57,7 +58,9 @@ public class PostulacionController {
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody PostulacionDTO postulacionDTO) {
-
+        if (postulacionService.thereIsAnApplicationFromThisStudentToThisOffer(postulacionDTO.getCedula(), postulacionDTO.getOfertalaboral_id()) != 0) {
+            throw new AppException(HttpStatus.BAD_REQUEST, "El estudiante ya está aplicando a esta oferta");
+        }
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(postulacionService.save(postulacionDTO));
     }
@@ -65,7 +68,12 @@ public class PostulacionController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody PostulacionDTO postulacionDTO) {
+
         PostulacionDTO postulacionFromDb = postulacionService.findByIdToDTO(id);
+
+        if (!postulacionFromDb.getCedula().equals(postulacionDTO.getCedula()) && postulacionService.thereIsAnApplicationFromThisStudentToThisOffer(postulacionDTO.getCedula(), postulacionDTO.getOfertalaboral_id()) != 0) {
+            throw new AppException(HttpStatus.BAD_REQUEST, "El estudiante ya está aplicando a esta oferta");
+        }
         postulacionFromDb.setFecha(postulacionDTO.getFecha());
         postulacionFromDb.setEstado(postulacionDTO.getEstado());
         postulacionFromDb.setOfertalaboral_id(postulacionDTO.getOfertalaboral_id());
