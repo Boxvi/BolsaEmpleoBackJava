@@ -36,11 +36,6 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
     @Override
     public Postulacion mapToEntity(PostulacionDTO postulacionDTO) {
 
-
-        if (postulacionRepository.thereIsAnApplicationFromThisStudentToThisOffer(postulacionDTO.getCedula(), postulacionDTO.getOfertalaboral_id()) != 0) {
-            throw new AppException(HttpStatus.BAD_REQUEST, "El estudiante ya está aplicando a esta oferta");
-        }
-
         Postulacion postulacion = new Postulacion();
 
         Estudiante estudiante = estudianteRepository.findByCedula(postulacionDTO.getCedula())
@@ -106,13 +101,16 @@ public class PostulacionServiceImpl extends GenericServiceImpl<Postulacion> impl
                 .collect(Collectors.toList());
     }
 
-    public List<PostulacionDTO> findByEmpresaId(long empresa_id){
+    public List<PostulacionDTO> findByEmpresaId(long empresa_id) {
         return postulacionRepository.findByEmpresaID(empresa_id)
                 .stream()
                 .map(postulacion -> mapToDTO(postulacion))
                 .collect(Collectors.toList());
     }
 
+    public Integer thereIsAnApplicationFromThisStudentToThisOffer(String cedula, long oferta_id) {
+        return postulacionRepository.thereIsAnApplicationFromThisStudentToThisOffer(cedula, oferta_id);
+    }
 
 }
 
