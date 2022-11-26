@@ -15,7 +15,7 @@ public interface ReferenciaPersonalRepository extends GenericRepository<Referenc
 
     Optional<ReferenciaPersonal> findByNombre(String nombre);
 
-    @Query(value = "select * from referenciaPersonal where estudiante_id = :estudiante_id", nativeQuery = true)
+    @Query(value = "select * from referencia_personal where estudiante_id  = :estudiante_id", nativeQuery = true)
     List<ReferenciaPersonal> findByEstudiante(long estudiante_id);
 
 }
