@@ -3,7 +3,9 @@ package ec.edu.ista.springgc1.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 
 @Data
@@ -50,7 +52,9 @@ public class OfertaLaboral {
 
     @JsonIgnore
     @OneToMany(mappedBy = "ofertaLaboral",cascade = CascadeType.REFRESH ,orphanRemoval = true)
-    private List<Postulacion> postulacions;
+    private Set<Postulacion> postulacions = new HashSet<>();
+
+
 
 }
 

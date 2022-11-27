@@ -21,7 +21,7 @@ public class Postulacion {
     private String estado;
 
     //relacion con empresa
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "oferta_id")
     private OfertaLaboral ofertaLaboral;
 
