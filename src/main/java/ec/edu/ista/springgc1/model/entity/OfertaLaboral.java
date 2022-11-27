@@ -1,7 +1,9 @@
 package ec.edu.ista.springgc1.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Data
@@ -46,7 +48,9 @@ public class OfertaLaboral {
     @JoinColumn(name = "ciu_id")
     private Ciudad ciudad;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "ofertaLaboral",cascade = CascadeType.REFRESH ,orphanRemoval = true)
+    private List<Postulacion> postulacions;
 
 }
 
