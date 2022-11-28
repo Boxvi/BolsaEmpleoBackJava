@@ -2,7 +2,7 @@ package ec.edu.ista.springgc1.security;
 
 import ec.edu.ista.springgc1.model.entity.Rol;
 import ec.edu.ista.springgc1.model.entity.Usuario;
-import ec.edu.ista.springgc1.repository.generic.UsuarioRepository;
+import ec.edu.ista.springgc1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

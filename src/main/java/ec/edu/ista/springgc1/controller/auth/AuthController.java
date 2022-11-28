@@ -3,6 +3,7 @@ package ec.edu.ista.springgc1.controller.auth;
 import ec.edu.ista.springgc1.exception.AppException;
 import ec.edu.ista.springgc1.model.dto.LoginDTO;
 import ec.edu.ista.springgc1.model.dto.UsuarioDTO;
+import ec.edu.ista.springgc1.model.entity.Usuario;
 import ec.edu.ista.springgc1.security.jwt.JwtAuthResponse;
 import ec.edu.ista.springgc1.security.jwt.JwtTokenProvider;
 import ec.edu.ista.springgc1.service.impl.UsuarioServiceImpl;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 
 @CrossOrigin
 @RestController
@@ -42,8 +44,10 @@ public class AuthController {
 
         String token = jwtTokenProvider.generateToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Usuario usuario = usuarioService.findByUsername(userDetails.getUsername());
+
         JwtAuthResponse jwtAuthResponse = new JwtAuthResponse(
-                token, userDetails.getUsername(),userDetails.getAuthorities()
+                token, usuario.getId(), usuario.getUsername(),userDetails.getAuthorities()
         );
 
         return ResponseEntity.ok(jwtAuthResponse);
@@ -57,6 +61,6 @@ public class AuthController {
         }
 
         usuarioService.save(usuarioDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Usuario Registrado");
+        return ResponseEntity.status(HttpStatus.CREATED).body(Collections.singletonMap("mensaje","Usuario Registrado"));
     }
 }

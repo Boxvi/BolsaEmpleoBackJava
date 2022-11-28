@@ -1,11 +1,11 @@
 package ec.edu.ista.springgc1.model.dto;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class EstudianteDTO implements Serializable {
@@ -20,11 +20,13 @@ public class EstudianteDTO implements Serializable {
     @NotEmpty
     private String apellidos;
     private char genero;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date fechaNacimiento;
+
+    private LocalDate fechaNacimiento;
     @NotEmpty
     private String ciudad;
     private String direccion;
     private String estadoCivil;
-    private String fotografia;
+
+    private String rutaImagen;
+    private String urlImagen;
 }

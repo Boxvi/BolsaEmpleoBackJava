@@ -51,6 +51,7 @@ public class SectorEmpresarialController {
 
 
         sectorFromDb.setNombre(sectorEmpresarial.getNombre());
+        sectorFromDb.setDescripcion(sectorEmpresarial.getDescripcion());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(empresarialService.save(sectorFromDb));
     }

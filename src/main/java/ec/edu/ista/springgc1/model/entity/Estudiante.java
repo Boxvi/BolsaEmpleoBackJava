@@ -3,6 +3,7 @@ package ec.edu.ista.springgc1.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -30,7 +31,7 @@ public class Estudiante {
     private char genero;
 
     @Column(name = "fecha_nacimiento")
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @ManyToOne
     @JoinColumn(name = "ciu_id")
@@ -40,5 +41,9 @@ public class Estudiante {
     @Column(name = "estado_civil")
     private String estadoCivil;
 
-    private String fotografia;
+    @Column(name = "ruta_imagen")
+    private String rutaImagen;
+
+    @Transient
+    private String urlImagen;
 }
