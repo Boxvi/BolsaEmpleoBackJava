@@ -4,13 +4,14 @@ import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Data
 public class PostulacionDTO implements Serializable {
 
     private Long id;
 
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     @NotEmpty
     private String estado;
